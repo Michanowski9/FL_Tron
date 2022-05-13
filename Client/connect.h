@@ -1,0 +1,24 @@
+typedef enum {
+        JOIN,
+        CREATE_ROOM
+}MenuDecision;
+
+typedef enum{
+        ALL_FINE, //bo to zero xd
+        JOIN_ERROR,
+	FREE_TABLE_NOT_FOUND,
+        CREATE_ROOM_ERROR
+}Error;
+
+int connectToServer();
+
+int join( int socketInput);
+
+int createRoom(int socketInput, int playersNumber);
+
+
+// sem-semaphor
+void turnOnReceiveSocket(int socket, void* board, void* sem);
+
+void sendInput(int socketInput, char key);
+
