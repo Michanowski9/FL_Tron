@@ -11,25 +11,117 @@
 
 #include "serverReceive.h"
 
+
+#define MAX_NICK_LENGTH 10
+#define MAX_MESSAGE_SIZE 80
 #define MAX_TABLES 10
 
-typedef struct{
-	int playersNumber;
-	int maxPlayersNumber;
-	char** nicks;//tablica nickow
-}TableMock;
 
-
-TableMock* CreateTable(int maxPlayers){
-	TableMock* table= malloc(sizeof(TableMock));
+//mock do testow 
+Board* CreateBoardMock(int maxPlayers){
+	Board* table= malloc(sizeof(Board));
 	table->playersNumber=0;
 	table->maxPlayersNumber=maxPlayers;
-	table->nicks = malloc(sizeof(char*)*maxPlayers);
+	table->players = (Player*)malloc(sizeof(Player)*maxPlayers);
 	for(int i=0;i<maxPlayers;i++){
-		table->nicks[i]=malloc(sizeof(char*)*80);
+		table->players[i].nick=malloc(sizeof(char*)*MAX_NICK_LENGTH);
 	}
+
+	table->size=8;
+	table->tile = (int**)malloc(sizeof(int*)*8);
+	for(int i=0;i<8;i++){
+		table->tile[i] = (int*)malloc(sizeof(int)*8);
+		for(int j=0;j<8;j++){
+			table->tile[i][j]=0;
+		}
+	}
+	
+
 	return table;
 }
+
+
+void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES]){
+	//szukanie stolu
+	char buffer[MAX_MESSAGE_SIZE];
+	int i=0;
+	bool found=false;
+	int tableIndex=0;
+	while(i<*tablesNumber && found == false){
+		if(tables[i]->playersNumber < tables[i]->maxPlayersNumber){
+			found = true;
+			tableIndex=i;
+		}
+		i++;
+	}
+	if(found == true){
+		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		strcpy(buffer,"OK JOIN");
+		send(socketInput,buffer,strlen(buffer),0);		
+		//mkthread czy jak to tam bylo
+		//tables[tableIndex].AddPlayer(socketInput, Player); <- to powinno byc		
+	}
+	else{
+		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		strcpy(buffer,"NO FREE TABLE");
+		send(socketInput,buffer,strlen(buffer),0);
+	}
+}
+
+
+void cleanTables(Board** tables, int* tablesNumber){
+	int deletedTables = 0;
+	//usuwanie i czyszczenie
+	for(int i=0;i<*tablesNumber;i++){
+		if(tables[i]->state == DEAD){
+			deletedTables++;
+			free(tables[i]);
+			for(int j=0;i+j<*tablesNumber-1;j++){//przesuwamy
+				tables[i+j] = tables[i+j+1];
+			}
+		}
+	}
+	
+	*tablesNumber-=deletedTables;
+
+}
+
+
+void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size){
+//tworzenie stolu i dodanie tam gracza
+	char buffer[MAX_MESSAGE_SIZE];
+
+	cleanTables(tables,tablesNumber);	
+
+
+	if(*tablesNumber < MAX_TABLES){
+		tables[*tablesNumber] = CreateBoardMock(size);//utworzenie stolu ta funkcja ma tworzyc nowy proces!
+		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		strcpy(buffer,"OK CREATE");
+		send(socketInput,buffer,strlen(buffer),0);
+		tablesNumber += 1;
+
+		//utworzenie procesu sluchajacego i danie go stolowi. tu server konczy swoja robote
+		if(fork()==0){ //mkthread
+			//dziecko czyli sluchacz
+			startListening(socketInput);
+		}
+		else{
+			//dalej server
+			//tables[tablesNumber].AddPlayer(socketInput, Player); <- to powinno byc
+			//stol po odebraniu nowego gracza rozsyla nowy stan do wszystkich
+
+		}
+
+	}
+	else{
+		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		strcpy(buffer,"NO ROOM FOR NEW ROOM");
+		send(socketInput,buffer,strlen(buffer),0);
+	}
+
+}
+
 
 int main(int argc, char *argv[]){
 
@@ -41,7 +133,7 @@ int main(int argc, char *argv[]){
 	int result;
         struct sockaddr_in serv_addr;
 	char buffer[80];
-	TableMock *tables[MAX_TABLES];
+	Board **tables=(Board**)malloc(sizeof(Board*)*MAX_TABLES);
 	int tablesNumber=0;
 	
 	listenfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -71,55 +163,11 @@ int main(int argc, char *argv[]){
 		
 		//odpowiedz
 		if(strcmp(buffer,"join") == 0){
-			//szukanie stolu
-			int i=0;
-			bool found=false;
-			while(i<tablesNumber && found == false){
-				if(tables[i]->playersNumber<tables[i]->maxPlayersNumber){
-					found = true;
-				}
-				i++;
-			}
-
-			if(found == true){
-				memset(buffer,0,strlen(buffer));//czyszczenie bufora
-				strcpy(buffer,"OK JOIN");
-				send(connfd,buffer,strlen(buffer),0);
-				//a tu wyślij stann lobby
-				//jako druga wiadomosc
-			}
-			else{
-				memset(buffer,0,strlen(buffer));//czyszczenie bufora
-				strcpy(buffer,"NO FREE TABLE");
-				send(connfd,buffer,strlen(buffer),0);
-			}
+			Join(connfd,&tablesNumber,tables);
 		}
-		else if(strcmp(buffer,"create room") == 0){
-			//tworzenie stolu i dodanie tam gracza
-
-			if(tablesNumber<MAX_TABLES){
-				tables[tablesNumber]=CreateTable(2);
-				memset(buffer,0,strlen(buffer));//czyszczenie bufora
-				strcpy(buffer,"OK CREATE");
-				send(connfd,buffer,strlen(buffer),0);
-				tablesNumber += 1;
-
-				//utworzenie procesu sluchajacego i danie go stolowi. tu server konczy swoja robote
-				if(fork()==0){
-					//dziecko czyli sluchacz
-					startListening(connfd);
-				}
-				else{
-					//dalej server
-					//tables[tablesNumber].AddPlayer(socket:); <- to powinno byc
-				}
-
-			}
-			else{
-				memset(buffer,0,strlen(buffer));//czyszczenie bufora
-				strcpy(buffer,"NO ROOM FOR NEW ROOM");
-				send(connfd,buffer,strlen(buffer),0);
-			}
+		else if(strncmp(buffer,"create room",11) == 0){
+			int size = atoi(&buffer[12]);
+			CreateTable(connfd,&tablesNumber,tables,size);
 		}
 				
 

@@ -1,4 +1,6 @@
-typedef enum {
+#include "../structs.h"
+
+typedef enum MenuDecision{
         JOIN,
         CREATE_ROOM
 }MenuDecision;
@@ -12,13 +14,15 @@ typedef enum{
 
 int connectToServer();
 
-int join( int socketInput);
+int join(int socketInput);
 
 int createRoom(int socketInput, int playersNumber);
 
 
 // sem-semaphor
-void turnOnReceiveSocket(int socket, void* board, void* sem);
+void* turnOnReceiveSocket(void* arg);
+
+void CreateReceiveSocket(int socket, Board* board,Player* player, int* startGame,int*startCounter, void* sem);
 
 void sendInput(int socketInput, char key);
 

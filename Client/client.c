@@ -9,13 +9,25 @@
 
 #include "connect.h"
 
-
+#define MAX_NICK_LENGTH 10
 
 int main (int argc, char *argv[]){
 	printf("client: turned on!\n");
 	int result;
 	int socketInput;
 	socketInput = connectToServer();
+
+	//utworzenie zmiennych gry
+	int startGame = 0;
+	int startCounter = 0;
+
+
+	//utworzenie gracza
+	Player player;
+	player.nick = (char*)malloc(sizeof(char) * MAX_NICK_LENGTH);
+	strcpy(player.nick,"kuba");
+	
+
 	if(socketInput != SO_ERROR){
 		printf("client: CONNECTED!\n");
 		//tutaj petla sesji
@@ -30,7 +42,9 @@ int main (int argc, char *argv[]){
 		if(result == ALL_FINE){
 			//waiting in lobby
 			//od tego momentu musi być nowy proces!
-			
+			Board board;			
+			board.playersNumber=0;
+			CreateReceiveSocket(socketInput,&board,&player,&startGame,&startCounter,0);
 			
 
 			//wait for game to start 
@@ -40,8 +54,10 @@ int main (int argc, char *argv[]){
 			//leave to menu
 			sendInput(socketInput,'w');
 
-					
+			//testy lobby
 			
+
+
 		}
 		else{
 			//sprawdz jaki blad

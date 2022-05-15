@@ -12,7 +12,7 @@ cd ../
 cd Client
 gcc -Wall -c connect.c -o connect.o -lm
 gcc -Wall -c client.c -o client.o -lm
-gcc client.o connect.o -o client -lm
+gcc client.o connect.o -o client -lm -lpthread
 
 
 
