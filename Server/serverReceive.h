@@ -1,6 +1,7 @@
 #include "../structs.h"
+#include "../stringFuncs.h"
 
-void* startListening(int listenSocket);
+void* startListening(void* arg);
 
 void updateWaitingRoom(int sockets, Player* players,int n); //player nazwa,indeks w grze
 

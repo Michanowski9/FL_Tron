@@ -9,6 +9,7 @@
 #include <math.h>
 
 #include "connect.h"
+#include "../stringFuncs.h"
 
 #define MAX_MESSAGE_SIZE 80
 #define HTONS 3001
@@ -42,9 +43,12 @@ int connectToServer(){
 //dolaczyc do dowolnego stolu
 //zwraca 0 gdy sie udalo
 //w przeciwnym razie FREE_TABLE_NOT_FOUND
-int join(int socketInput){
+int join(int socketInput, char* nick){
         char buffer[MAX_MESSAGE_SIZE];
-        strcpy(buffer,"join");
+        strcpy(buffer,"join ");
+	
+	strcat(buffer,nick);
+	strcat(buffer," ");
         send(socketInput,buffer,strlen(buffer),0);
 
 	memset(buffer,0,strlen(buffer));//czyszczenie bufora
@@ -69,10 +73,14 @@ int join(int socketInput){
 //metoda tworzaca stol
 //zero gdy sie powiodlo
 //CREATE_ROOM_ERROR gdy nie
-int createRoom(int socketInput,int playersNumber){
+int createRoom(int socketInput,char* nick,int playersNumber){
         char buffer[MAX_MESSAGE_SIZE];
         strcpy(buffer,"create room ");
 
+
+	//dodanie nicku:
+	strcat(buffer,nick);
+	strcat(buffer," ");
 	//dodanie liczby graczy
 	{
                 char numb[3];
@@ -111,82 +119,44 @@ void sendInput(int socketInput, char key){
 }
 
 
-int getNextSpaceBar(char* text, int since){
-	if(text[since]==' '){
-		since++;
-	}
-	while(text[since] != ' '){
-		since++;
-	}
-	return since;
-}
-
-
-//return indeks spacji po tym slowie
-int getNextNick(char* input, char* output, int since){
-	//szukanie pierwszej litery
-	while(input[since] == ' '){
-		since++;
-	}
-
-	int length=1;
-	while(input[since+length] != ' ' && input[since+length] != '\0'){
-		length++;
-	}
-
-	for(int i=0;i<length;i++){
-		output[i]=input[since+i];
-	}
-
-	return since+length;
-}
-
-
-typedef struct Argument{
-	int socketOutput;
-	Board* board;
-	void* sem;
-	Player* player;
-	int* startGame; //boole tak naprawde
-	int* startCounter;
-}Argument;
-
 
 void* turnOnReceiveSocket(void* arg){
 
-	Board* board=((Argument*)arg)->board;
-	int socketOutput=((Argument*)arg)->socketOutput;
-	void *sem=((Argument*)arg)->sem;
+	Board* board = ((Argument*)arg)->board;
+	int socketOutput = ((Argument*)arg)->socketOutput;
+	pthread_mutex_t *sem = ((Argument*)arg)->sem;
 	Player* player = ((Argument*)arg)->player;
 	int* startCounter;
 	int* startGame;
 	startCounter=((Argument*)arg)->startCounter;
 	startGame=((Argument*)arg)->startGame;
 
+	free((Argument*)arg);
+
 	char buffer[MAX_MESSAGE_SIZE];
 	while(1){//<- otwarty(socket)
 		memset(buffer,0,strlen(buffer));//czyszczenie bufora
         	recv(socketOutput,buffer,MAX_MESSAGE_SIZE,0);
-	        printf("cl_rec_sock: %s\n",buffer);
-
+	        printf("cl_rec_sock: %s\n",buffer);		
 
 		//sygnal smierci
 		if(strncmp(buffer,"DEATHS",5) == 0){
 			int N=buffer[7];
 			int bufIndex=8;			
+			pthread_mutex_lock(sem);//LOCK
 			for(int i=0;i<N;i++){
 				if(buffer[i] !=' '){
 					int ind=buffer[bufIndex]-'0';
-					//sem pozwol
 					board->players[ind].state = DEAD;
-					//sem odblokuj
 				}
 				bufIndex++;
 			}
+			pthread_mutex_unlock(sem);//UNLOCK
 		}//sygnal zmiany planszy		
 		else if(strncmp(buffer,"DIFF",4) == 0){
 			int N=buffer[5]-'0';
 			int bufIndex=6;						
+			pthread_mutex_lock(sem);//LOCK
 			for(int i=0;i<N ;i++){
 				if(buffer[i] !=' '){
 					int x,y,val;
@@ -200,13 +170,13 @@ void* turnOnReceiveSocket(void* arg){
 					bufIndex=getNextSpaceBar(buffer,bufIndex);
 					val=atoi(&buffer[bufIndex]);
 					
-					//sem paozwol
+					
 					printf("x=%d,y=%d,val=%d\n",x,y,val);
 					board->tile[x][y]=val;
-					//sem odblokouj			
 				}
 				bufIndex++;
 			}
+			pthread_mutex_unlock(sem);//UNLOCK							
 				
 		}else if(strncmp(buffer,"PLAYERS",7) == 0){
 			int N=buffer[8]-'0'; //zal ze liczba graczy jest jednocyfrowa
@@ -228,12 +198,15 @@ void* turnOnReceiveSocket(void* arg){
 
 			
 			
-			//sem pozwol
+			pthread_mutex_lock(sem);//LOCK
+
 			free(board->players);
 			board->players = players;
 			board->playersNumber = N;
 			player->index = newPlayerIndex;
-			//sem odblokuj
+
+			pthread_mutex_unlock(sem);//UNLOCK
+			
 
 		}else if(strncmp(buffer,"TABLE",5) == 0){
 			int tableSize= atoi(&buffer[6]);
@@ -247,26 +220,29 @@ void* turnOnReceiveSocket(void* arg){
                         board->size=tableSize;
 
 		}else if(strncmp(buffer,"START_COUNTER",13) == 0){
+			pthread_mutex_lock(sem);//LOCK
 			*startCounter = 1;	
+			pthread_mutex_unlock(sem);//UNLOCK
 		}else if(strncmp(buffer,"START_GAME", 10) == 0){
+			pthread_mutex_lock(sem);//LOCK
 			*startGame = 1;
+			pthread_mutex_unlock(sem);//UNLOCK
 		}
 	}
 }
 
 
-void CreateReceiveSocket(int socket, Board* board,Player* player,int*startGame, int*startCounter, void* sem){
+void CreateReceiveSocket(int socket, Board* board,Player* player,int*startGame, int*startCounter, pthread_mutex_t* sem){
 	pthread_t thread_id;
 
-	Argument arg;
-	arg.board=board;
-	arg.sem=sem;
-	arg.socketOutput=socket;
-	arg.player=player;
-	arg.startGame=startGame;
-	arg.startCounter=startCounter;
-	pthread_create(&thread_id, NULL, &turnOnReceiveSocket, (void*)&arg);
-	sleep(1);
+	Argument*arg = (Argument*)malloc(sizeof(Argument));
+	arg->board=board;
+	arg->sem=sem;
+	arg->socketOutput=socket;
+	arg->player=player;
+	arg->startGame=startGame;
+	arg->startCounter=startCounter;
+	pthread_create(&thread_id, NULL, &turnOnReceiveSocket, (void*)arg);
 }
 
 

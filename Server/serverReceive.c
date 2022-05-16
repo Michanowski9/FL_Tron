@@ -3,23 +3,30 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "../structs.h"
+#include <pthread.h>
 
+#include "../structs.h"
 #define MAX_MESSAGE_SIZE 80
 
 //watek sluchajcy musi wiedziec, ktorego gracza dotyczy (index zawart w zmiennej player) //done
-void* startListening(int listenSocket, Player* player){
+void* startListening(void* arg){
+
+	Player* player = ((Argument*)arg)->player;
+	int listenSocket = ((Argument*)arg)->socketOutput;
+	pthread_mutex_t* sem = ((Argument*)arg)->sem;
+	free((Argument*) arg);
+	
 
 	char buffer[MAX_MESSAGE_SIZE];
 	char key;
-	for(int i=0;i<3;i++){ //socket otwarty
+	for(int i=0;i<3;i++){ //while socket otwarty
 		memset(buffer,0,MAX_MESSAGE_SIZE);
 		recv(listenSocket,buffer,80,0);		
 		printf("server listening socket received: %s\n",buffer);	
 		
 		if(strncmp(buffer,"INPUT",5) == 0){
 			key=buffer[6];
-			//sem lock
+			pthread_mutex_lock(sem);//LOCK SEM
 			switch(key){
 		       		case('w'): printf("hit w!\n");player->direction = UP;break;
 		       		case('s'): printf("hit s!\n");player->direction = DOWN;break;
@@ -27,7 +34,8 @@ void* startListening(int listenSocket, Player* player){
 		       		case('d'): printf("hit d!\n");player->direction = RIGHT;break;
 				case(' '): printf("hit  !\n");player->state = BOOSTING;break;
 			}
-			//sem unlock
+			pthread_mutex_unlock(sem); //UNLOCK SEM
+			
 		}				
 	}
 	printf("server listening socket close\n");

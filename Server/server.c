@@ -9,39 +9,51 @@
 #include <stdbool.h>
 #include<errno.h>
 
-#include "serverReceive.h"
+#include "table.h"
 
 
 #define MAX_NICK_LENGTH 10
 #define MAX_MESSAGE_SIZE 80
 #define MAX_TABLES 10
+#define TABLE_SIZE 100
 
 
-//mock do testow 
-Board* CreateBoardMock(int maxPlayers){
+//utworzenie watku stolu
+Board* CreateBoard(int maxPlayers){
 	Board* table= malloc(sizeof(Board));
 	table->playersNumber=0;
 	table->maxPlayersNumber=maxPlayers;
 	table->players = (Player*)malloc(sizeof(Player)*maxPlayers);
+	table->sem = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+
+	pthread_mutex_init(table->sem,0);//inicjalizacja semafora
+
 	for(int i=0;i<maxPlayers;i++){
 		table->players[i].nick=malloc(sizeof(char*)*MAX_NICK_LENGTH);
 	}
 
-	table->size=8;
-	table->tile = (int**)malloc(sizeof(int*)*8);
-	for(int i=0;i<8;i++){
-		table->tile[i] = (int*)malloc(sizeof(int)*8);
-		for(int j=0;j<8;j++){
+	table->size=TABLE_SIZE;
+	table->tile = (int**)malloc(sizeof(int*)*TABLE_SIZE);
+	for(int i=0;i<TABLE_SIZE;i++){
+		table->tile[i] = (int*)malloc(sizeof(int)*TABLE_SIZE);
+		for(int j=0;j<TABLE_SIZE;j++){
 			table->tile[i][j]=0;
 		}
 	}
+
+
+	//utworzenie nowego watku:
+	Argument *arg=(Argument*)malloc(sizeof(Argument));
+	arg->board = table;
+	pthread_t thread_id;
+	pthread_create(&thread_id,NULL,&TurnBoardOn,(void*)arg);
 	
 
 	return table;
 }
 
 
-void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES]){
+void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES],char*nick){
 	//szukanie stolu
 	char buffer[MAX_MESSAGE_SIZE];
 	int i=0;
@@ -58,8 +70,25 @@ void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES]){
 		memset(buffer,0,strlen(buffer));//czyszczenie bufora
 		strcpy(buffer,"OK JOIN");
 		send(socketInput,buffer,strlen(buffer),0);		
-		//mkthread czy jak to tam bylo
+		
+		Player *player = (Player*)malloc(sizeof(Player));
+		player->nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+		player->nick = nick;
+		player->index = tables[tableIndex]->playersNumber;
+
+		Argument *arg = (Argument*)malloc(sizeof(Argument));
+		arg->socketOutput=socketInput;
+		arg->player = player;
+		arg->sem=tables[tableIndex]->sem; //ten sam semafor co stol
+
+		//dodanie gracza do stolu
 		//tables[tableIndex].AddPlayer(socketInput, Player); <- to powinno byc		
+		
+
+
+		//utworzenie watku sluchajacego.
+		pthread_t thread_id;
+		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
 	}
 	else{
 		memset(buffer,0,strlen(buffer));//czyszczenie bufora
@@ -87,7 +116,7 @@ void cleanTables(Board** tables, int* tablesNumber){
 }
 
 
-void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size){
+void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size,char* nick){
 //tworzenie stolu i dodanie tam gracza
 	char buffer[MAX_MESSAGE_SIZE];
 
@@ -95,23 +124,32 @@ void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size){
 
 
 	if(*tablesNumber < MAX_TABLES){
-		tables[*tablesNumber] = CreateBoardMock(size);//utworzenie stolu ta funkcja ma tworzyc nowy proces!
+		Board *table= CreateBoard(size);
+
+		tables[*tablesNumber] = table;
+		tablesNumber += 1;
 		memset(buffer,0,strlen(buffer));//czyszczenie bufora
 		strcpy(buffer,"OK CREATE");
+		
 		send(socketInput,buffer,strlen(buffer),0);
-		tablesNumber += 1;
+		sleep(1);//bez sleepa glupieje
 
-		//utworzenie procesu sluchajacego i danie go stolowi. tu server konczy swoja robote
-		if(fork()==0){ //mkthread
-			//dziecko czyli sluchacz
-			startListening(socketInput);
-		}
-		else{
-			//dalej server
-			//tables[tablesNumber].AddPlayer(socketInput, Player); <- to powinno byc
-			//stol po odebraniu nowego gracza rozsyla nowy stan do wszystkich
+		Player *player = (Player*)malloc(sizeof(Player));
+		player->nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+		player->nick = nick;
+		player->index = table->playersNumber;
 
-		}
+		Argument *arg = (Argument*)malloc(sizeof(Argument));
+		arg->socketOutput=socketInput;
+		arg->player = player;
+
+		//utworzenie watku sluchajacego.
+		pthread_t thread_id;
+		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
+		
+		//dalej server
+		//tables[tablesNumber].AddPlayer(socketInput, Player); <- to powinno byc,cos tego typu
+		//stol po odebraniu nowego gracza rozsyla nowy stan lobby do wszystkich	
 
 	}
 	else{
@@ -162,12 +200,19 @@ int main(int argc, char *argv[]){
 		printf("server: received: %s\n",buffer);
 		
 		//odpowiedz
-		if(strcmp(buffer,"join") == 0){
-			Join(connfd,&tablesNumber,tables);
+		if(strncmp(buffer,"join",4) == 0){	
+			int bufIndex=5;
+			char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+			getNextNick(buffer,nick,bufIndex);
+			
+			Join(connfd,&tablesNumber,tables,nick);
 		}
 		else if(strncmp(buffer,"create room",11) == 0){
+			int bufIndex=12;
+			char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+			bufIndex=getNextNick(buffer,nick,bufIndex);
 			int size = atoi(&buffer[12]);
-			CreateTable(connfd,&tablesNumber,tables,size);
+			CreateTable(connfd,&tablesNumber,tables,size,nick);
 		}
 				
 

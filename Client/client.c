@@ -15,7 +15,7 @@ int main (int argc, char *argv[]){
 	printf("client: turned on!\n");
 	int result;
 	int socketInput;
-	socketInput = connectToServer();
+	pthread_mutex_t sem;
 
 	//utworzenie zmiennych gry
 	int startGame = 0;
@@ -27,16 +27,17 @@ int main (int argc, char *argv[]){
 	player.nick = (char*)malloc(sizeof(char) * MAX_NICK_LENGTH);
 	strcpy(player.nick,"kuba");
 	
+	socketInput = connectToServer();
 
 	if(socketInput != SO_ERROR){
 		printf("client: CONNECTED!\n");
 		//tutaj petla sesji
 
 		int playersNumber=2;
-		MenuDecision decision=CREATE_ROOM;
+		MenuDecision decision=JOIN;
 		switch(decision){
-			case(JOIN): result=join(socketInput);break;
-			case(CREATE_ROOM): result=createRoom(socketInput,playersNumber);break;
+			case(JOIN): result=join(socketInput,player.nick);break;
+			case(CREATE_ROOM): result=createRoom(socketInput,player.nick,playersNumber);break;
 		}			
 
 		if(result == ALL_FINE){
@@ -44,7 +45,7 @@ int main (int argc, char *argv[]){
 			//od tego momentu musi być nowy proces!
 			Board board;			
 			board.playersNumber=0;
-			CreateReceiveSocket(socketInput,&board,&player,&startGame,&startCounter,0);
+			CreateReceiveSocket(socketInput,&board,&player,&startGame,&startCounter,&sem);
 			
 
 			//wait for game to start 
@@ -54,7 +55,13 @@ int main (int argc, char *argv[]){
 			//leave to menu
 			sendInput(socketInput,'w');
 
-			//testy lobby
+			//notka do michala:
+			//semafory sa dla:
+			//-pol planszy
+			//-stanu gracza
+			//-sygnal startu gry
+			//-sygnal startu odliczania
+			//-gracze w lobby - co do tego to niech klient sprawdza co jakis czas, czy ktos nowy nie wszedl
 			
 
 

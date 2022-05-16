@@ -37,5 +37,19 @@ typedef struct Board{
 	Player* players;
 	int playersNumber;
 	int maxPlayersNumber;
+	pthread_mutex_t* sem;
 	PlayerState state; //reuse state'a
 }Board;
+
+
+
+typedef struct Argument{
+        int socketOutput;
+        Board* board;
+        pthread_mutex_t* sem;
+        Player* player;
+        int* startGame; //boole tak naprawde
+        int* startCounter;
+}Argument;
+
+

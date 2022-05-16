@@ -1,4 +1,5 @@
 #include "../structs.h"
+#include "../stringFuncs.h"
 
 typedef enum MenuDecision{
         JOIN,
@@ -14,15 +15,15 @@ typedef enum{
 
 int connectToServer();
 
-int join(int socketInput);
+int join(int socketInput,char* nick);
 
-int createRoom(int socketInput, int playersNumber);
+int createRoom(int socketInput,char* nick, int playersNumber);
 
 
 // sem-semaphor
 void* turnOnReceiveSocket(void* arg);
 
-void CreateReceiveSocket(int socket, Board* board,Player* player, int* startGame,int*startCounter, void* sem);
+void CreateReceiveSocket(int socket, Board* board,Player* player, int* startGame,int*startCounter, pthread_mutex_t* sem);
 
 void sendInput(int socketInput, char key);
 
