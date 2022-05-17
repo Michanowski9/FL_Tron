@@ -1,0 +1,9 @@
+﻿  server.cpp
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(61,43): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(85,27): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(86,43): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(124,43): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(149,43): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(206,10): warning C4244: "argument": konwersja z "SOCKET" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\FL_TRON\Server\server.cpp(213,17): warning C4244: "argument": konwersja z "SOCKET" do "int", możliwa utrata danych
+  serwer.vcxproj -> D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON\x64\Debug\serwer.exe
