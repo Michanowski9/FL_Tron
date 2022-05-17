@@ -11,6 +11,7 @@
 
 #include "table.h"
 
+#define HTONS 3001
 
 #define MAX_NICK_LENGTH 10
 #define MAX_MESSAGE_SIZE 80
@@ -67,7 +68,7 @@ void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES],char*nick
 		i++;
 	}
 	if(found == true){
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
 		strcpy(buffer,"OK JOIN");
 		send(socketInput,buffer,strlen(buffer),0);		
 		
@@ -91,9 +92,10 @@ void Join(int socketInput, int*tablesNumber, Board* tables[MAX_TABLES],char*nick
 		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
 	}
 	else{
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
 		strcpy(buffer,"NO FREE TABLE");
 		send(socketInput,buffer,strlen(buffer),0);
+		sleep(1);
 	}
 }
 
@@ -128,7 +130,7 @@ void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size,cha
 
 		tables[*tablesNumber] = table;
 		tablesNumber += 1;
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
 		strcpy(buffer,"OK CREATE");
 		
 		send(socketInput,buffer,strlen(buffer),0);
@@ -153,7 +155,7 @@ void CreateTable(int socketInput, int*tablesNumber, Board** tables, int size,cha
 
 	}
 	else{
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
 		strcpy(buffer,"NO ROOM FOR NEW ROOM");
 		send(socketInput,buffer,strlen(buffer),0);
 	}
@@ -186,35 +188,35 @@ int main(int argc, char *argv[]){
 		printf("server: binding error %d %s\n",errno,strerror(errno));
 	}
 	else{
+		for(;;){
+			//czekanie na polaczenie
+			printf("server: waiting for connection\n");
+			listen(listenfd, 10);
+			connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
+			printf("server: Somebody connected\n");
 
-		//czekanie na polaczenie
-        	printf("server: waiting for connection\n");
-	        listen(listenfd, 10);
-		connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
-		printf("server: Somebody connected\n");
 
-
-		//pierwsza wiadomosc
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
-		recv(connfd,buffer,80,0);
-		printf("server: received: %s\n",buffer);
-		
-		//odpowiedz
-		if(strncmp(buffer,"join",4) == 0){	
-			int bufIndex=5;
-			char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
-			getNextNick(buffer,nick,bufIndex);
+			//pierwsza wiadomosc
+			memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
+			recv(connfd,buffer,80,0);
+			printf("server: received: %s\n",buffer);
 			
-			Join(connfd,&tablesNumber,tables,nick);
-		}
-		else if(strncmp(buffer,"create room",11) == 0){
-			int bufIndex=12;
-			char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
-			bufIndex=getNextNick(buffer,nick,bufIndex);
-			int size = atoi(&buffer[12]);
-			CreateTable(connfd,&tablesNumber,tables,size,nick);
-		}
+			//odpowiedz
+			if(strncmp(buffer,"join",4) == 0){	
+				int bufIndex=5;
+				char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+				getNextNick(buffer,nick,bufIndex);
 				
+				Join(connfd,&tablesNumber,tables,nick);
+			}
+			else if(strncmp(buffer,"create room",11) == 0){
+				int bufIndex=12;
+				char* nick=(char*)malloc(sizeof(char)*MAX_NICK_LENGTH);
+				bufIndex=getNextNick(buffer,nick,bufIndex);
+				int size = atoi(&buffer[12]);
+				CreateTable(connfd,&tablesNumber,tables,size,nick);
+			}	
+		}	
 
 	}
 

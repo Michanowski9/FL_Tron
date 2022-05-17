@@ -13,7 +13,9 @@
 
 #define MAX_MESSAGE_SIZE 80
 #define HTONS 3001
-#define INET_ADDR "127.0.0.1"
+//#define INET_ADDR "127.0.0.1"
+//\/ to adres ip mojego kompa \/
+#define INET_ADDR "192.168.0.13"     
 #define MAX_NICK_LENGTH 10
 
 
@@ -51,7 +53,7 @@ int join(int socketInput, char* nick){
 	strcat(buffer," ");
         send(socketInput,buffer,strlen(buffer),0);
 
-	memset(buffer,0,strlen(buffer));//czyszczenie bufora
+	memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
         recv(socketInput,buffer,MAX_MESSAGE_SIZE,0);
         printf("client: server respone: %s\n",buffer);
         if(strcmp(buffer,"OK JOIN") == 0){
@@ -91,7 +93,7 @@ int createRoom(int socketInput,char* nick,int playersNumber){
 	
 
         send(socketInput,buffer,strlen(buffer),0);
-        memset(buffer,0,strlen(buffer));//czyszczenie bufora
+        memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
         recv(socketInput,buffer,MAX_MESSAGE_SIZE,0);
         printf("client: server respone: %s\n",buffer);
         if(strcmp(buffer,"OK CREATE") == 0){
@@ -135,7 +137,7 @@ void* turnOnReceiveSocket(void* arg){
 
 	char buffer[MAX_MESSAGE_SIZE];
 	while(1){//<- otwarty(socket)
-		memset(buffer,0,strlen(buffer));//czyszczenie bufora
+		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
         	recv(socketOutput,buffer,MAX_MESSAGE_SIZE,0);
 	        printf("cl_rec_sock: %s\n",buffer);		
 

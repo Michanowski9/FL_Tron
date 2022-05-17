@@ -48,7 +48,7 @@ void* startListening(void* arg){
 //poprawia indeks gracza po stronie klienckiej
 void updateWaitingRoom(int socketInput, Player* players, int n){ 
 	char buffer[MAX_MESSAGE_SIZE];
-	memset(buffer,0,strlen(buffer));
+	memset(buffer,0,MAX_MESSAGE_SIZE);
 	strcpy(buffer,"PLAYERS ");//inicjalizacja
 
 	//dodanie liczby graczy
