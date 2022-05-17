@@ -1,0 +1,4082 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "Przepełnienie buforu podczas zapisywania do elementu „table->players”."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 3,
+                  "endLine": 27,
+                  "endColumn": 56
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateBoard",
+                  "decoratedName": "?CreateBoard@@YAPEAUBoard@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 19,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 21,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Wejdź do tej pętli (przyjmowane jest: „i<maxPlayers”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 28
+                          }
+                        },
+                        "message": {
+                          "text": "Element „i” może mieć wartość równą 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Kontynuuj tę pętlę (przyjmowane jest: „i<maxPlayers”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Nieprawidłowy zapis w elemencie „table->players” (poza zapisywalnym zakresem)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „table->players”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 3,
+                  "endLine": 27,
+                  "endColumn": 56
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateBoard",
+                  "decoratedName": "?CreateBoard@@YAPEAUBoard@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 19,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 21,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 17
+                          }
+                        },
+                        "message": {
+                          "text": "Element „table->players” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Wejdź do tej pętli (przyjmowane jest: „i<maxPlayers”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Element „table->players” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „arg”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 2,
+                  "endLine": 42,
+                  "endColumn": 15
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateBoard",
+                  "decoratedName": "?CreateBoard@@YAPEAUBoard@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 19,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 21,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 33,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 35,
+                            "startColumn": 21
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 35,
+                            "startColumn": 21
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 33,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 41,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 42,
+                            "startColumn": 13
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „table->tile[i]”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 4,
+                  "endLine": 35,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateBoard",
+                  "decoratedName": "?CreateBoard@@YAPEAUBoard@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 19,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 21,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 33,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Element „**table.tile” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 34,
+                            "startColumn": 16
+                          }
+                        },
+                        "message": {
+                          "text": "Wejdź do tej pętli (przyjmowane jest: „j<100”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 35,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "Element „**table.tile” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „table->tile”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 33,
+                  "startColumn": 3,
+                  "endLine": 33,
+                  "endColumn": 45
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateBoard",
+                  "decoratedName": "?CreateBoard@@YAPEAUBoard@@H@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 19,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 20,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 21,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 31,
+                            "startColumn": 14
+                          }
+                        },
+                        "message": {
+                          "text": "Element „table->tile” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 32,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Wejdź do tej pętli (przyjmowane jest: „i<100”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 33,
+                            "startColumn": 18
+                          }
+                        },
+                        "message": {
+                          "text": "Element „table->tile” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „player”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 3,
+                  "endLine": 70,
+                  "endColumn": 43
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Join",
+                  "decoratedName": "?Join@@YAXHPEAHQEAPEAUBoard@@PEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 58,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 60,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 4
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 69,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "Element „player” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 70,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Element „player” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „arg”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 3,
+                  "endLine": 75,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Join",
+                  "decoratedName": "?Join@@YAXHPEAHQEAPEAUBoard@@PEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 58,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 59,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 60,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 62,
+                            "startColumn": 4
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 65,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 66,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 67,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 69,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 70,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 72,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 74,
+                            "startColumn": 13
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 75,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "Ciąg „buffer” może nie być zakończony zerem."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 89,
+                  "startColumn": 3,
+                  "endLine": 89,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Join",
+                  "decoratedName": "?Join@@YAXHPEAHQEAPEAUBoard@@PEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "To wyrażenie może nie zakończyć zerem elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń tę pętlę (przyjmowane jest, że element „i<*tablesNumber&&found==0” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „found==1” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” musi być zakończony zerem według adnotacji SAL w elemencie „strlen”"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Używanie niezainicjowanej pamięci „buffer”."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 89,
+                  "startColumn": 26,
+                  "endLine": 89,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Join",
+                  "decoratedName": "?Join@@YAXHPEAHQEAPEAUBoard@@PEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 53,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "Nie zainicjowano elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 54,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 55,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 56,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 57,
+                            "startColumn": 24
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń tę pętlę (przyjmowane jest, że element „i<*tablesNumber&&found==0” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 64,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „found==1” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 90,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 91,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 89,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest używany, ale mógł nie zostać zainicjowany"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Używanie niezainicjowanej pamięci „*tables”."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 100,
+                  "startColumn": 6,
+                  "endLine": 100,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "cleanTables",
+                  "decoratedName": "?cleanTables@@YAXPEAPEAUBoard@@PEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 97,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 23
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 101,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 102,
+                            "startColumn": 8
+                          }
+                        },
+                        "message": {
+                          "text": "Nie zainicjowano elementu „*tables”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń tę pętlę (przyjmowane jest, że element „i+j<*tablesNumber-1” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Kontynuuj tę pętlę (przyjmowane jest: „i<*tablesNumber”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "Wejdź do tego rozgałęzienia (przyjmowane jest: „tables[i]->state==DEAD”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "Element „*tables” jest używany, ale mógł nie zostać zainicjowany"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26812",
+          "message": {
+            "text": "Typ wyliczeniowy „PlayerState” nie ma zakresu. Preferowany jest element „enum class” zamiast „enum” (enum.3)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 100,
+                  "startColumn": 6,
+                  "endLine": 100,
+                  "endColumn": 15
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "cleanTables",
+                  "decoratedName": "?cleanTables@@YAXPEAPEAUBoard@@PEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „player”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 133,
+                  "startColumn": 3,
+                  "endLine": 133,
+                  "endColumn": 43
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateTable",
+                  "decoratedName": "?CreateTable@@YAXHPEAHPEAPEAUBoard@@HPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 116,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 118,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 121,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 122,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 124,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 125,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 126,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 127,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 129,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 132,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "Element „player” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 133,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "Element „player” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "Wyłuskanie wskaźnika NULL „arg”. "
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 3,
+                  "endLine": 138,
+                  "endColumn": 21
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateTable",
+                  "decoratedName": "?CreateTable@@YAXHPEAHPEAPEAUBoard@@HPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 116,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 118,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 121,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 122,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 124,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 125,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 126,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 127,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 129,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 132,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 133,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 134,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 135,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 137,
+                            "startColumn": 13
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 138,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Element „arg” jest wyłuskiwany, ale nadal może mieć wartość NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "Ciąg „buffer” może nie być zakończony zerem."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 152,
+                  "startColumn": 3,
+                  "endLine": 152,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateTable",
+                  "decoratedName": "?CreateTable@@YAXHPEAHPEAPEAUBoard@@HPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 116,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "To wyrażenie może nie zakończyć zerem elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 118,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 121,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „*tablesNumber<10” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 152,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 152,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” musi być zakończony zerem według adnotacji SAL w elemencie „strlen”"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Używanie niezainicjowanej pamięci „buffer”."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 152,
+                  "startColumn": 26,
+                  "endLine": 152,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateTable",
+                  "decoratedName": "?CreateTable@@YAXHPEAHPEAPEAUBoard@@HPEAD@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 116,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "Nie zainicjowano elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 118,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 121,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „*tablesNumber<10” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 152,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 153,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 154,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 152,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest używany, ale mógł nie zostać zainicjowany"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6054",
+          "message": {
+            "text": "Ciąg „buffer” może nie być zakończony zerem."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 194,
+                  "startColumn": 3,
+                  "endLine": 194,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "main",
+                  "decoratedName": "main",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 163,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 166,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 166,
+                            "startColumn": 23
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 167,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 168,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 169,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "To wyrażenie może nie zakończyć zerem elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 170,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 173,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 174,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 176,
+                            "startColumn": 30
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 177,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 178,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 180,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 181,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „result!=0” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 187,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 188,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 189,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 190,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 194,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 194,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” musi być zakończony zerem według adnotacji SAL w elemencie „strlen”"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "Używanie niezainicjowanej pamięci „buffer”."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                },
+                "region": {
+                  "startLine": 194,
+                  "startColumn": 26,
+                  "endLine": 194,
+                  "endColumn": 26
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "main",
+                  "decoratedName": "main",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 163,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 166,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 166,
+                            "startColumn": 23
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 167,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 168,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 169,
+                            "startColumn": 7
+                          }
+                        },
+                        "message": {
+                          "text": "Nie zainicjowano elementu „buffer”"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 170,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 173,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 174,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 176,
+                            "startColumn": 30
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 177,
+                            "startColumn": 28
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 178,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 180,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 181,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "Pomiń to rozgałęzienie (przyjmowane jest, że element „result!=0” ma wartość false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 187,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 188,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 189,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 190,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 194,
+                            "startColumn": 9
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest wejściem dla elementu „strlen” (deklaracja pod adresem c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:215)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 195,
+                            "startColumn": 7
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 196,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+                          },
+                          "region": {
+                            "startLine": 194,
+                            "startColumn": 26
+                          }
+                        },
+                        "message": {
+                          "text": "Element „buffer” jest używany, ale mógł nie zostać zainicjowany"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.31.31107.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\bin\\HostX64\\x64\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x00007FF6608B9CC0 -il C:\\Users\\kubaw\\AppData\\Local\\Temp\\_CL_5d18f8ddast -typedil -f ..\\FL_TRON\\Server\\server.cpp -Ze -D_MSC_EXTENSIONS -Zp16 -pc \\:/ -D_MSC_VER=1931 -D_MSC_FULL_VER=193131107 -D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GR -D_CPPRTTI -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_DEBUG -D_CONSOLE -D_UNICODE -DUNICODE -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -Zc:wchar_t -Zc:forScope -permissive- -Fox64\\Debug\\server.obj -Fdx64\\Debug\\vc143.pdb -external:W 3 -Gd -analyze:projectdirectory D:\\pliki\\programy\\STUDIA\\Przetwarzanie Rozproszone\\FL_TRON\\serwer -analyze:rulesetdirectory ;C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\bin\\HostX64\\x64\\EspXEngine.dll -FC -errorreport:prompt -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\atlmfc\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\include -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\atlmfc\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.31.31103\\atlmfc\\include -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -external:I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/pliki/programy/STUDIA/Przetwarzanie Rozproszone/FL_TRON/FL_TRON/Server/server.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "da89722ac75b3173e026a8e083eccb2b3e142dac64aadd4cc445647ff471cbcf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/pliki/programy/studia/przetwarzanie rozproszone/fl_tron/fl_tron/server/table.h"
+          },
+          "hashes": {
+            "sha-256": "27ec47a747d709320b99490aec2b4ff743f9a5ac22953ea9b05d00626e2f5b46"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/pliki/programy/studia/przetwarzanie rozproszone/fl_tron/fl_tron/server/serverreceive.h"
+          },
+          "hashes": {
+            "sha-256": "e2efa24819e6987bb4381b1fbc7314ca4c62bc384515222055760333ceba41dd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/pliki/programy/studia/przetwarzanie rozproszone/fl_tron/fl_tron/structs.h"
+          },
+          "hashes": {
+            "sha-256": "61bae0aa51ba50a89dcae6965a8992460e85f67af59b93be9ee20588545f06c0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/pliki/programy/studia/przetwarzanie rozproszone/fl_tron/fl_tron/stringfuncs.h"
+          },
+          "hashes": {
+            "sha-256": "0353515078bd961f40ece9da02956df39ac39ba013a353873173957019d7f444"
+          }
+        }
+      ]
+    }
+  ]
+}
