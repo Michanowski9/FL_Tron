@@ -1,0 +1,6 @@
+﻿  connect.cpp
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(36,9): warning C4244: "return": konwersja z "SOCKET" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(49,45): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(80,45): warning C4267: "argument": konwersja z "size_t" do "int", możliwa utrata danych
+D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(93,19): warning C4244: "inicjowanie": konwersja z "SOCKET" do "int", możliwa utrata danych
+  FL_TRON.vcxproj -> D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_TRON_WINDOWS\x64\Debug\client.exe
