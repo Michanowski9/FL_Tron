@@ -33,3 +33,7 @@ to co jest wasze do modyfikacji głównie TO:
 client.cpp
 i table.cpp 
 !!!!!!!
+
+pamiętajcie by ustawić maszyną wirtualną z opcją sieciową "bridged"
+a jeśli się nie chce połączyć to zmieńcie tylko IP, po stronie klienckiej
+
