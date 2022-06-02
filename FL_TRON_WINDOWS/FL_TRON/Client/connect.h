@@ -1,17 +1,17 @@
 #include "../structs.h"
 #include "../stringFuncs.h"
 
-typedef enum MenuDecision{
+enum MenuDecision{
         JOIN,
         CREATE_ROOM
-}MenuDecision;
+};
 
-typedef enum{
+enum{
         ALL_FINE, //bo to zero xd
         JOIN_ERROR,
 	    FREE_TABLE_NOT_FOUND,
         CREATE_ROOM_ERROR
-}Error;
+};
 
 int connectToServer();
 

@@ -1,43 +1,45 @@
+#ifndef _STRUCTS_H_
+#define _STRUCTS_H_
+
 #include <mutex>
 #include <winsock2.h>
 #include <winsock.h>
 #include <windows.h>
 
-typedef struct Position{
+struct Position{
 	int x;
 	int y;
-}Position;
+};
 
-typedef struct Difference{
+struct Difference{
 	int x;
 	int y;
 	int val;
-}Difference;
+};
 
-typedef struct Player{
+struct Player{
 	char* nick; //max size 10
 	Position pos;
 	int index; //in table of players!
-}Player;
+};
 
-typedef struct Board{
+struct Board{
 	int** tile;
 	int size;
 	std::mutex* sem;
 	Player** players;
 	int playersNumber;
 	int maxPlayersNumber;	
-}Board;
+};
 
 
 
-typedef struct Argument{
+struct Argument {
 	SOCKET socketOutput;
-    Board* board;      
+	Board* board;
 	std::mutex* sem;
-    Player* player;
-    bool* gameStarted; 
-        
-}Argument;
+	Player* player;
+	bool* gameStarted;
+};
 
-
+#endif // !_STRUCTS_H_

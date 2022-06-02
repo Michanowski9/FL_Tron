@@ -1,15 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "connect.h"
 
+// if you want to write out to console buf, x, y, val uncomment this constant
+//#define TEST_OUTPUT
+
 #define MAX_MESSAGE_SIZE 80
 #define HTONS 3001
+
+/// Server IPv4 address, you can find it in your operating system on computer which is running server instance
+/// Settings -> Network -> (Settings Icon) -> IPv4 Address
+#define INET_ADDR "192.168.0.5"
 //#define INET_ADDR "127.0.1.1"
-#define INET_ADDR "192.168.0.87"
+
 #define TABLE_SIZE 8
 #define MAX_NICK_LENGTH 10
 #define MAX_PLAYERS 1
@@ -105,7 +113,9 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 			//to znaczy ze po³¹czenie zosta³o zerwane
 			socketConnected = false;
 		}
+#ifdef TEST_OUTPUT
 		printf("cl_rec_sock: %s\n", buffer); //kontrolny printf
+#endif // TEST_OUTPUT
 
 		//sygnal zmiany planszy		
 		if (strncmp(buffer, "DIFF", 4) == 0) {
@@ -116,8 +126,9 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 				if (buffer[i] != ' ') {
 					int x, y, val;
 					x = atoi(&buffer[bufIndex]);
-
+#ifdef TEST_OUTPUT
 					printf("buf=%d\n", bufIndex);
+#endif // TEST_OUTPUT
 
 					bufIndex = getNextSpaceBar(buffer, bufIndex);
 					y = atoi(&buffer[bufIndex]);
@@ -126,7 +137,9 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 					val = atoi(&buffer[bufIndex]);
 
 
+#ifdef TEST_OUTPUT
 					printf("x=%d,y=%d,val=%d\n", x, y, val);
+#endif // TEST_OUTPUT
 					board->tile[y][x] = val;
 				}
 				bufIndex++;
