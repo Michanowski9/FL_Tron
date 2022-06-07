@@ -101,14 +101,12 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 	int socketOutput = ((Argument*)arg)->socketOutput;
 	Player* player = ((Argument*)arg)->player;
 	mutex* sem = ((Argument*)arg)->sem;
-	bool* gameStarted;
-	gameStarted = ((Argument*)arg)->gameStarted;
+	bool* gameStarted = ((Argument*)arg)->gameStarted;
 
-	free((Argument*)arg); //zwolnienie pamiêci 
+	delete arg;
 
-	char buffer[MAX_MESSAGE_SIZE];
 	while (socketConnected) {//jest utrzymane po³¹czenie
-		memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
+		char buffer[MAX_MESSAGE_SIZE] = {};
 		if (recv(socketOutput, buffer, MAX_MESSAGE_SIZE, 0) == 0) { //jesli nic nie odebrano(czyli blad)
 			//to znaczy ze po³¹czenie zosta³o zerwane
 			socketConnected = false;
@@ -141,6 +139,7 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 					printf("x=%d,y=%d,val=%d\n", x, y, val);
 #endif // TEST_OUTPUT
 					board->tile[y][x] = val;
+					//refresh here board
 				}
 				bufIndex++;
 			}
