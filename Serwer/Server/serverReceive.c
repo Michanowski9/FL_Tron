@@ -8,6 +8,11 @@
 #include "../structs.h"
 #define MAX_MESSAGE_SIZE 80
 
+#define KEY_UP 0x26
+#define KEY_DOWN 0x28
+#define KEY_LEFT 0x25
+#define KEY_RIGHT 0x27
+
 //watek sluchajcy musi wiedziec, ktorego gracza dotyczy (index zawart w zmiennej player) //done
 void* startListening(void* arg){
 	
@@ -33,16 +38,16 @@ void* startListening(void* arg){
 			key=buffer[6];
 			pthread_mutex_lock(sem);//LOCK SEM
 			switch(key){//ROZPATRZENIE KLAWISZA OD KLIENTA
-		       		case('w'): 
+		       		case KEY_UP:
 					printf("hit w!\n");
 				 	break;
-		       		case('s'): 
+		       		case KEY_DOWN: 
 					printf("hit s!\n");
 					break;
-		       		case('a'): 
+		       		case KEY_LEFT: 
 					printf("hit a!\n");
 					break;
-		       		case('d'): 
+		       		case KEY_RIGHT: 
 					printf("hit d!\n");
 					break;
 				case(' '): 
