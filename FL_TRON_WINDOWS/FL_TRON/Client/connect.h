@@ -9,21 +9,18 @@ typedef enum MenuDecision{
 typedef enum{
         ALL_FINE, //bo to zero xd
         JOIN_ERROR,
-	FREE_TABLE_NOT_FOUND,
+	    FREE_TABLE_NOT_FOUND,
         CREATE_ROOM_ERROR
 }Error;
 
 int connectToServer();
 
-int join(int socketInput,char* nick);
-
-int createRoom(int socketInput,char* nick, int playersNumber);
+int join(int socketInput);
 
 
-// sem-semaphor
 DWORD WINAPI turnOnReceiveSocket(void* arg);
 
-void CreateReceiveSocket(int socket, Board* board, Player* player, int* startGame, int* startCounter, std::mutex* sem);
+void CreateReceiveSocket(SOCKET socket, Board* board, Player* player, bool* gameStarted, std::mutex* sem);
 
-void sendInput(int socketInput, char key);
+void sendInput(SOCKET socketInput, char key);
 

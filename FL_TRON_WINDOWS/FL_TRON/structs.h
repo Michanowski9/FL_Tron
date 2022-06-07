@@ -2,18 +2,6 @@
 #include <winsock2.h>
 #include <winsock.h>
 #include <windows.h>
-typedef enum PlayerState{
-	DEAD,
-	ALIVE,
-	BOOSTING
-}PlayerState;
-
-typedef enum Direction{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-}Direction;
 
 typedef struct Position{
 	int x;
@@ -29,8 +17,6 @@ typedef struct Difference{
 typedef struct Player{
 	char* nick; //max size 10
 	Position pos;
-	PlayerState state;	
-	Direction direction;
 	int index; //in table of players!
 }Player;
 
@@ -38,21 +24,20 @@ typedef struct Board{
 	int** tile;
 	int size;
 	std::mutex* sem;
-	Player* players;
+	Player** players;
 	int playersNumber;
 	int maxPlayersNumber;	
-	PlayerState state; //reuse state'a
 }Board;
 
 
 
 typedef struct Argument{
-        int socketOutput;
-        Board* board;      
-		std::mutex* sem;
-        Player* player;
-        int* startGame; //boole tak naprawde
-        int* startCounter;
+	SOCKET socketOutput;
+    Board* board;      
+	std::mutex* sem;
+    Player* player;
+    bool* gameStarted; 
+        
 }Argument;
 
 

@@ -9,9 +9,10 @@
 #define MAX_MESSAGE_SIZE 80
 #define HTONS 3001
 //#define INET_ADDR "127.0.1.1"
-#define INET_ADDR "192.168.0.164"
-
+#define INET_ADDR "192.168.0.87"
+#define TABLE_SIZE 8
 #define MAX_NICK_LENGTH 10
+#define MAX_PLAYERS 1
 
 using namespace std;
 
@@ -41,12 +42,10 @@ int connectToServer() {
 //dolaczyc do dowolnego stolu
 //zwraca 0 gdy sie udalo
 //w przeciwnym razie FREE_TABLE_NOT_FOUND
-int join(int socketInput, char* nick) {
+int join(int socketInput) {
 	char buffer[MAX_MESSAGE_SIZE];
 	strcpy(buffer, "join ");
 
-	strcat(buffer, nick);
-	strcat(buffer, " ");
 	send(socketInput, buffer, strlen(buffer), 0);
 
 	memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
@@ -67,92 +66,50 @@ int join(int socketInput, char* nick) {
 
 }
 
-
-//metoda tworzaca stol
-//zero gdy sie powiodlo
-//CREATE_ROOM_ERROR gdy nie
-int createRoom(int socketInput, char* nick, int playersNumber) {
-	char buffer[MAX_MESSAGE_SIZE];
-	strcpy(buffer, "create room ");
-
-
-	//dodanie nicku:
-	strcat(buffer, nick);
-	strcat(buffer, " ");
-	//dodanie liczby graczy
-	{
-		char numb[3];
-		sprintf(numb, "%d", playersNumber); //atoi nie chcialo dzialac
-		strcat(buffer, numb);
-		strcat(buffer, " ");
-	}
-
-
-	send(socketInput, buffer, strlen(buffer), 0);
-	memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
-	recv(socketInput, buffer, MAX_MESSAGE_SIZE, 0);
-	printf("client: server respone: %s\n", buffer);
-	if (strcmp(buffer, "OK CREATE") == 0) {
-		printf("client: created room: \n");
-	}
-	else {
-		printf("client: create room error\n");
-		return CREATE_ROOM_ERROR;
-	}
-
-
-	return 0;
-
-}
-
-
-void sendInput(int socketInput, char key) {
+/// <summary>
+/// wysy³a wciœniey klawisz do serwera
+/// </summary>
+/// <param name="socketInput">socket po³¹czeniowy</param>
+/// <param name="key">char wciœniêtego znaku</param>
+void sendInput(SOCKET socketInput, char key) {
 	char buffer[MAX_MESSAGE_SIZE];
 	strcpy(buffer, "INPUT ");
 
 	strncat(buffer, &key, 1);
 
 	send(socketInput, buffer, strlen(buffer), 0);
-
 }
 
 
-
+/// <summary>
+/// w¹tek nas³uchuj¹cy, modyfikuj¹cy dane w tle
+/// </summary>
+/// <param name="arg"></param>
+/// <returns></returns>
 DWORD WINAPI turnOnReceiveSocket(void* arg) {
-
+	bool socketConnected = true; //stan polaczenia
+	//wczytanie argumentów
 	Board* board = ((Argument*)arg)->board;
 	int socketOutput = ((Argument*)arg)->socketOutput;
 	Player* player = ((Argument*)arg)->player;
 	mutex* sem = ((Argument*)arg)->sem;
-	int* startCounter;
-	int* startGame;
-	startCounter = ((Argument*)arg)->startCounter;
-	startGame = ((Argument*)arg)->startGame;
+	bool* gameStarted;
+	gameStarted = ((Argument*)arg)->gameStarted;
 
-	free((Argument*)arg);
+	free((Argument*)arg); //zwolnienie pamiêci 
 
 	char buffer[MAX_MESSAGE_SIZE];
-	while (1) {//<- otwarty(socket)
+	while (socketConnected) {//jest utrzymane po³¹czenie
 		memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
-		recv(socketOutput, buffer, MAX_MESSAGE_SIZE, 0);
-		printf("cl_rec_sock: %s\n", buffer);
+		if (recv(socketOutput, buffer, MAX_MESSAGE_SIZE, 0) == 0) { //jesli nic nie odebrano(czyli blad)
+			//to znaczy ze po³¹czenie zosta³o zerwane
+			socketConnected = false;
+		}
+		printf("cl_rec_sock: %s\n", buffer); //kontrolny printf
 
-		//sygnal smierci
-		if (strncmp(buffer, "DEATHS", 5) == 0) {
-			int N = buffer[7];
-			int bufIndex = 8;
-			sem->lock();//LOCK
-			for (int i = 0; i < N; i++) {
-				if (buffer[i] != ' ') {
-					int ind = buffer[bufIndex] - '0';
-					board->players[ind].state = DEAD;
-				}
-				bufIndex++;
-			}
-			sem->unlock();//UNLOCK
-		}//sygnal zmiany planszy		
-		else if (strncmp(buffer, "DIFF", 4) == 0) {
-			int N = buffer[5] - '0';
+		//sygnal zmiany planszy		
+		if (strncmp(buffer, "DIFF", 4) == 0) {
+			int N = buffer[5] - '0';//zalozenie ze liczba graczy jest jednocyfrowa
 			int bufIndex = 6;
 			sem->lock();//LOCK
 			for (int i = 0; i < N; i++) {
@@ -170,48 +127,19 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 
 					printf("x=%d,y=%d,val=%d\n", x, y, val);
-					board->tile[x][y] = val;
+					board->tile[y][x] = val;
 				}
 				bufIndex++;
 			}
 			sem->unlock();//UNLOCK						
 
 		}
-		else if (strncmp(buffer, "PLAYERS", 7) == 0) {
-			int N = buffer[8] - '0'; //zal ze liczba graczy jest jednocyfrowa
-			int bufIndex = 10;
-			Player* players;
-			players = (Player*)malloc(sizeof(Player) * N);
-			int newPlayerIndex = 0;
-
-			for (int i = 0; i < N; i++) { //zczytujemy nicki
-				char* nick = (char*)malloc(sizeof(char) * 10);
-				bufIndex = getNextNick(buffer, nick, bufIndex);
-				players[i].nick = nick;
-
-				if (strcmp(nick, player->nick) == 0) {//jesli okazuje sie ze zly playerIndex to musi byc tutaj blad wtedy!
-					newPlayerIndex = i;
-				}
-			}
-
-
-
-
-			sem->lock();//LOCK
-
-			free(board->players);
-			board->players = players;
-			board->playersNumber = N;
-			player->index = newPlayerIndex;
-
-			sem->unlock();//UNLOCK
-
-
-		}
-		else if (strncmp(buffer, "TABLE", 5) == 0) {
-			int tableSize = atoi(&buffer[6]);
+		//INIT BOARD
+		else if (strncmp(buffer, "BOARD", 5) == 0) {
+			int tableSize = TABLE_SIZE;
+			//rezerwacja miejsca na stol
 			board->tile = (int**)malloc(sizeof(int*) * tableSize);
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < tableSize; i++) {
 				board->tile[i] = (int*)malloc(sizeof(int) * tableSize);
 				for (int j = 0; j < tableSize; j++) {
 					board->tile[i][j] = 0;
@@ -219,22 +147,40 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 			}
 			board->size = tableSize;
 
-		}
-		else if (strncmp(buffer, "START_COUNTER", 13) == 0) {
-			sem->lock();//LOCK
-			*startCounter = 1;
-			sem->unlock();//UNLOCK
+
+			//ustawienie graczy na poczatku
+			Position pos;
+			int bufIndex = 6;			
+			board->players = (Player**)malloc(sizeof(Player*)*MAX_PLAYERS);//rezerwacja miejsca na wskazniki na graczy
+			for (int i = 0; i < MAX_PLAYERS; i++) {				
+				board->players[i] = new Player();//rezerw. miejsca na gracza
+				pos.x = atoi(&buffer[bufIndex]);				//pobranie pos
+				bufIndex = getNextSpaceBar(buffer, bufIndex); 
+				pos.y = atoi(&buffer[bufIndex]);				//pobranie pos
+				board->players[i]->pos = pos;   //przypisanie pos
+
+				board->tile[pos.y][pos.x] = i+1; //aktualizacja mapy
+			}
+
 		}
 		else if (strncmp(buffer, "START_GAME", 10) == 0) {
 			sem->lock();//LOCK
-			*startGame = 1;
+			*gameStarted = true;
 			sem->unlock();//UNLOCK
 		}
 	}
+	return NULL;
 }
 
-
-void CreateReceiveSocket(int socket, Board* board, Player* player, int* startGame, int* startCounter, mutex* sem) {
+/// <summary>
+/// funkcja tworz¹ca nowy w¹tek, bo przesy³anie wielu argumentów to wrzód na dupie
+/// </summary>
+/// <param name="socket">socket komunikacyjny</param>
+/// <param name="board">adres sto³u</param>
+/// <param name="player">adres gracza(</param>
+/// <param name="gameStarted">adres bola czy gra sie ma juz zaczac</param>
+/// <param name="sem">adres semafora</param>
+void CreateReceiveSocket(SOCKET socket, Board* board, Player* player, bool* gameStarted, mutex* sem) {
 	DWORD thread_id;
 
 	Argument* arg = (Argument*)malloc(sizeof(Argument));
@@ -242,8 +188,7 @@ void CreateReceiveSocket(int socket, Board* board, Player* player, int* startGam
 	arg->sem = sem;
 	arg->socketOutput = socket;
 	arg->player = player;
-	arg->startGame = startGame;
-	arg->startCounter = startCounter;
+	arg->gameStarted = gameStarted;
 	CreateThread(0, NULL, turnOnReceiveSocket, (void*)arg ,0, &thread_id);
 }
 

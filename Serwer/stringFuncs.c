@@ -27,5 +27,3 @@ int getNextNick(char* input, char* output, int since){
 
         return since+length;
 }
-
-

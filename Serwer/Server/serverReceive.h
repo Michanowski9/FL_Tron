@@ -3,11 +3,7 @@
 
 void* startListening(void* arg);
 
-void updateWaitingRoom(int sockets, Player* players,int n); //player nazwa,indeks w grze
-
-void sendInitialBoard(int socketInput, int boardSize);
-
-void startReadyCounter(int socketInput);
+void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, int playersNumber);
 
 void startGame(int socketInput);
 

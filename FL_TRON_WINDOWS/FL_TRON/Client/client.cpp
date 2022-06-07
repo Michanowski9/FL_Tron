@@ -3,9 +3,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_NICK_LENGTH 10
+
+#define MAX_MESSAGE_SIZE 80
+#define TABLE_SIZE 8
 
 using namespace std;
+
+
+/// <summary>
+/// sprawdza czy gra się już rozpoczęła(czy był sygnał do serwera)
+/// zwracal true, gdy gra się już rozpoczęła,
+/// w przeciwnym razie false.
+/// </summary>
+/// <param name="sem">semafor</param>
+/// <param name="gameStarted">zmienna gdzie zachowany jest stan czy gra sie rozpoczeła</param>
+/// <returns></returns>
+bool GameStarted(mutex* sem, bool* gameStarted) {
+	bool started;
+	sem->lock();//LOCK
+	started = *gameStarted;
+	sem->unlock();//UNLOCK
+	
+	return started;
+}
+
 
 int main (int argc, char *argv[]){
 	//init socketow
@@ -13,8 +34,7 @@ int main (int argc, char *argv[]){
 	WSADATA wsas;
 	WORD wersja;
 	wersja = MAKEWORD(2, 0);
-	result=WSAStartup(wersja, &wsas);
-
+	result=WSAStartup(wersja, &wsas); //INIT SYSTEMU SOCKETOW
 
 
 	printf("client: turned on!\n");
@@ -23,57 +43,53 @@ int main (int argc, char *argv[]){
 	mutex sem;
 
 	//utworzenie zmiennych gry
-	int startGame = 0;
-	int startCounter = 0;
+	bool gameStarted = false;	
 
 
 	//utworzenie gracza
-	Player player;
-	player.nick = (char*)malloc(sizeof(char) * MAX_NICK_LENGTH);
-	strcpy(player.nick,"kuba");
+	Player player;		
 	
-	socketInput = connectToServer();
+	//POLĄCZENIE
+	socketInput = connectToServer();//PROBA POLACZENIA SIE Z SERWEREM
 
 	if(socketInput != SO_ERROR){
-		printf("client: CONNECTED!\n");
-		//tutaj petla sesji
+		printf("client: CONNECTED!\n");		
+		//DOLACZENIE
+		result=join(socketInput);			
 
-		int playersNumber=2;
-		MenuDecision decision=JOIN;
-		switch(decision){
-			case(JOIN): result=join(socketInput,player.nick);break;
-			case(CREATE_ROOM): result=createRoom(socketInput,player.nick,playersNumber);break;
-		}			
-
-		if(result == ALL_FINE){
-			//waiting in lobby
-			//od tego momentu musi być nowy proces!
+		if(result == ALL_FINE){			
+			
 			Board board;			
 			board.playersNumber=0;
-			CreateReceiveSocket(socketInput,&board,&player,&startGame,&startCounter,&sem);
+			//tworzenie wątku nasłuchującego
+			CreateReceiveSocket(socketInput,&board,&player,&gameStarted,&sem);
 			
+			//waiting to start
+			while(!GameStarted(&sem,&gameStarted)) {
+				Sleep(1);
+			}
+			printf("game started!\n");
 
-			//wait for game to start 
-			//
-			//play
-			//
-			//leave to menu
-			sendInput(socketInput,'w');
+			for (;;) {//PETLA GRY <- JAK WIDZISZ NIE WARUNKU STOPU
+				//DRAW BOARD
+				sem.lock();//LOCK
+				for (int row = 0; row < board.size; row++) {
+					for (int col = 0; col < board.size; col++) {
+						printf("%d", board.tile[row][col]);
+					}
+					printf("\n");
 
-			//notka do michala:
-			//semafory sa dla:
-			//-pol planszy
-			//-stanu gracza
-			//-sygnal startu gry
-			//-sygnal startu odliczania
-			//-gracze w lobby - co do tego to niech klient sprawdza co jakis czas, czy ktos nowy nie wszedl
+				}
+				sem.unlock();//UNLOCK
+				printf("\n");
+				Sleep(1000);
+			}
 			
 
 
 		}
-		else{
-			//sprawdz jaki blad
-			printf("some error\n");
+		else{			
+			printf("join error\n");
 		}
 
 	}
