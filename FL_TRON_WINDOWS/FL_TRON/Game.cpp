@@ -64,7 +64,10 @@ void Game::StartInputHandling(SOCKET socket)
 void Game::AddToRedraw(Point point, int value)
 {
 	map[point.x][point.y] = value;
+
+	sem.lock();
 	fieldsToRedraw.push(point);
+	sem.unlock();
 }
 
 void Game::DrawMap()
@@ -92,10 +95,12 @@ void Game::Update()
 
 void Game::RedrawPartOfMap()
 {
+	sem.lock();
 	while (fieldsToRedraw.size() > 0)
 	{
 		Point field = fieldsToRedraw.front();
 		fieldsToRedraw.pop();
 		graphicsEnginePtr->DrawCell(field.x, field.y, map[field.x][field.y]);
 	}
+	sem.unlock();
 }

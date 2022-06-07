@@ -1,16 +1,16 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
-#include <mutex>
-
+ 
 #include "InputHandler.h"
 #include "GraphicsEngine.h"
+
 #include <queue>
 #include <thread>
 #include "Point.h"
+#include <mutex>
 
 #include "connect.h"
-#include <winsock.h>
 
 namespace KEY {
 	const char UP = 0x26;
@@ -47,6 +47,8 @@ private:
 
 	std::thread inputHandlingThread;
 	std::queue<Point> fieldsToRedraw;
+
+	std::mutex sem;
 
 	int** map;
 	Point mapSize;

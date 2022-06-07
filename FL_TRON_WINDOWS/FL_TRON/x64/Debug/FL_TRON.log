@@ -1,4 +1,5 @@
 ﻿  Game.cpp
+  client.cpp
   connect.cpp
   Generating Code...
   FL_TRON.vcxproj -> C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\x64\Debug\client.exe
