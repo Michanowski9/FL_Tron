@@ -1,3 +1,6 @@
+#ifndef _CONNECT_H_
+#define _CONNECT_H_
+
 #include "../structs.h"
 #include "../stringFuncs.h"
 
@@ -24,3 +27,5 @@ void CreateReceiveSocket(SOCKET socket, Board* board, Player* player, bool* game
 
 void sendInput(SOCKET socketInput, char key);
 
+
+#endif // !_CONNECT_H_

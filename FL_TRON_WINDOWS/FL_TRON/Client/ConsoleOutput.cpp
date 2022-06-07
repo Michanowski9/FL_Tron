@@ -35,6 +35,14 @@ const byte ConsoleOutput::NumberToColor(int number) const
 		return COLORS::BLUE;
 	case 1:
 		return COLORS::WHITE;
+	case 2:
+		return COLORS::GREEN;
+	case 3:
+		return COLORS::TURQUOISE;
+	case 4:
+		return COLORS::YELLOW;
+	case 5:
+		return COLORS::GOLD;
 	default:
 		return COLORS::RED;
 	}

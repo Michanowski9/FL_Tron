@@ -32,8 +32,6 @@ struct Board{
 	int maxPlayersNumber;	
 };
 
-
-
 struct Argument {
 	SOCKET socketOutput;
 	Board* board;

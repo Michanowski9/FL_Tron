@@ -15,7 +15,7 @@
 
 /// Server IPv4 address, you can find it in your operating system on computer which is running server instance
 /// Settings -> Network -> (Settings Icon) -> IPv4 Address
-#define INET_ADDR "192.168.0.5"
+#define INET_ADDR "192.168.0.9"
 //#define INET_ADDR "127.0.1.1"
 
 #define TABLE_SIZE 8

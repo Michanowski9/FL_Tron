@@ -6,6 +6,8 @@
 
 #include "Game.h"
 #include "ConsoleOutput.h"
+#include "Keyboard.h"
+#include "WindowsKeyboard.h"
 
 #define MAX_MESSAGE_SIZE 80
 #define TABLE_SIZE 8
@@ -16,6 +18,12 @@ using namespace std;
 bool GameStarted(mutex* sem, bool* gameStarted);
 
 int main (int argc, char *argv[]){
+
+	auto output = std::make_shared<ConsoleOutput>();
+
+	auto input = std::make_shared<Keyboard>();
+	input->SetSystemKeyboard(std::make_shared<WindowsKeyboard>());
+
 	//init socketow
 	WORD wersja = MAKEWORD(2, 0);
 	WSADATA wsas;
@@ -48,7 +56,11 @@ int main (int argc, char *argv[]){
 
 			//setup game
 			Game game(sem, board);
-			game.SetGraphicsEngine(std::make_shared<ConsoleOutput>());
+			game.SetGraphicsEngine(output);
+			game.SetInputHandler(input);
+
+			game.StartInputHandling(socketInput);
+			
 			game.DrawMap();
 			game.MainLoop();
 		}
