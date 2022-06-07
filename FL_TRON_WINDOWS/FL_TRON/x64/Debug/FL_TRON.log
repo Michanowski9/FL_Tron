@@ -1,6 +1,4 @@
-﻿  connect.cpp
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(44,9): warning C4244: 'return': conversion from 'SOCKET' to 'int', possible loss of data
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(57,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(88,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\Client\connect.cpp(101,19): warning C4244: 'initializing': conversion from 'SOCKET' to 'int', possible loss of data
+﻿  Game.cpp
+  connect.cpp
+  Generating Code...
   FL_TRON.vcxproj -> C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\x64\Debug\client.exe

@@ -19,25 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Client\client.cpp" />
-    <ClCompile Include="Client\connect.cpp" />
-    <ClCompile Include="Client\ConsoleOutput.cpp" />
-    <ClCompile Include="Client\Game.cpp" />
-    <ClCompile Include="Client\Keyboard.cpp" />
-    <ClCompile Include="Client\WindowsKeyboard.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="connect.cpp" />
+    <ClCompile Include="ConsoleOutput.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="stringFuncs.cpp" />
+    <ClCompile Include="WindowsKeyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Client\connect.h" />
-    <ClInclude Include="Client\ConsoleOutput.h" />
-    <ClInclude Include="Client\Game.h" />
-    <ClInclude Include="Client\GraphicsEngine.h" />
-    <ClInclude Include="Client\InputHandler.h" />
-    <ClInclude Include="Client\Keyboard.h" />
-    <ClInclude Include="Client\SystemKeyboard.h" />
-    <ClInclude Include="Client\WindowsKeyboard.h" />
+    <ClInclude Include="connect.h" />
+    <ClInclude Include="ConsoleOutput.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GraphicsEngine.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="stringFuncs.h" />
     <ClInclude Include="structs.h" />
+    <ClInclude Include="SystemKeyboard.h" />
+    <ClInclude Include="WindowsKeyboard.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
