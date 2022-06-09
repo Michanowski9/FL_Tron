@@ -7,6 +7,7 @@
 #include <math.h>
 #include "connect.h"
 
+
 // if you want to write out to console buf, x, y, val uncomment this constant
 //#define TEST_OUTPUT
 
@@ -15,8 +16,7 @@
 
 /// Server IPv4 address, you can find it in your operating system on computer which is running server instance
 /// Settings -> Network -> (Settings Icon) -> IPv4 Address
-#define INET_ADDR "192.168.0.9"
-//#define INET_ADDR "127.0.1.1"
+#define INET_ADDR "192.168.0.88"
 
 #define TABLE_SIZE 8
 #define MAX_NICK_LENGTH 10
@@ -75,10 +75,10 @@ int join(int socketInput) {
 }
 
 /// <summary>
-/// wysy³a wciœniey klawisz do serwera
+/// wysyÅ‚a wciÅ›niey klawisz do serwera
 /// </summary>
-/// <param name="socketInput">socket po³¹czeniowy</param>
-/// <param name="key">char wciœniêtego znaku</param>
+/// <param name="socketInput">socket poÅ‚Ä…czeniowy</param>
+/// <param name="key">char wciÅ›niÄ™tego znaku</param>
 void sendInput(SOCKET socketInput, char key) {
 	char buffer[MAX_MESSAGE_SIZE];
 	strcpy(buffer, "INPUT ");
@@ -90,13 +90,13 @@ void sendInput(SOCKET socketInput, char key) {
 
 
 /// <summary>
-/// w¹tek nas³uchuj¹cy, modyfikuj¹cy dane w tle
+/// wÄ…tek nasÅ‚uchujÄ…cy, modyfikujÄ…cy dane w tle
 /// </summary>
 /// <param name="arg"></param>
 /// <returns></returns>
 DWORD WINAPI turnOnReceiveSocket(void* arg) {
 	auto socketConnected = true; //stan polaczenia
-	//wczytanie argumentów
+	//wczytanie argumentÃ³w
 	auto socketOutput = ((Argument*)arg)->socketOutput;
 	auto gameStarted = ((Argument*)arg)->gameStarted;
 	auto gamePtr = ((Argument*)arg)->game;
@@ -104,10 +104,10 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 	delete arg;
 
-	while (socketConnected) {//jest utrzymane po³¹czenie
+	while (socketConnected) {//jest utrzymane poÅ‚Ä…czenie
 		char buffer[MAX_MESSAGE_SIZE] = {};
 		if (recv(socketOutput, buffer, MAX_MESSAGE_SIZE, 0) == 0) { //jesli nic nie odebrano(czyli blad)
-			//to znaczy ze po³¹czenie zosta³o zerwane
+			//to znaczy ze poÅ‚Ä…czenie zostaÅ‚o zerwane
 			socketConnected = false;
 		}
 
@@ -133,32 +133,38 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 					y = atoi(&buffer[bufIndex]);
 					bufIndex = getNextSpaceBar(buffer, bufIndex);
 					val = atoi(&buffer[bufIndex]);
-
+					bufIndex = getNextSpaceBar(buffer, bufIndex);
 #ifdef TEST_OUTPUT
 					printf("x=%d,y=%d,val=%d\n", x, y, val);
 #endif // TEST_OUTPUT
 
 					//board->tile[y][x] = val;
 					gamePtr->AddToRedraw(Point(x, y), val);
-				}
-				bufIndex++;
+					
+				}				
 			}
 		}
 		//INIT BOARD
 		else if (strncmp(buffer, "BOARD", 5) == 0) {
-			int tableSize = TABLE_SIZE; //TODO
+			int tableSize; 
+			int bufIndex = 6;
+			tableSize = atoi(&buffer[bufIndex]);				//pobranie Mapsize
+			bufIndex = getNextSpaceBar(buffer, bufIndex);
+
 
 			gamePtr->SetMapSize(tableSize);
 
-			//ustawienie graczy na poczatku
-			int bufIndex = 6;			
+			//odczytanie liczy graczy
+			int maxPlayer;
+			maxPlayer = atoi(&buffer[bufIndex]);				//pobranie maxPlayer
+			bufIndex = getNextSpaceBar(buffer, bufIndex);
 			
-			for (int i = 0; i < MAX_PLAYERS; i++) {				
+			for (int i = 0; i < maxPlayer; i++) {
 				Point pos;
 				pos.x = atoi(&buffer[bufIndex]);				//pobranie pos
 				bufIndex = getNextSpaceBar(buffer, bufIndex); 
 				pos.y = atoi(&buffer[bufIndex]);				//pobranie pos
-				
+				bufIndex = getNextSpaceBar(buffer, bufIndex);
 				//board->tile[pos.y][pos.x] = i+1; //aktualizacja mapy
 				gamePtr->AddToRedraw(Point(pos.x, pos.y), i + 1);
 			}
@@ -172,10 +178,10 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 
 /// <summary>
-/// funkcja tworz¹ca nowy w¹tek, bo przesy³anie wielu argumentów to wrzód na dupie
+/// funkcja tworzÄ…ca nowy wÄ…tek, bo przesyÅ‚anie wielu argumentÃ³w to wrzÃ³d na dupie
 /// </summary>
 /// <param name="socket">socket komunikacyjny</param>
-/// <param name="board">adres sto³u</param>
+/// <param name="board">adres stoÅ‚u</param>
 /// <param name="player">adres gracza(</param>
 /// <param name="gameStarted">adres bola czy gra sie ma juz zaczac</param>
 /// <param name="sem">adres semafora</param>
