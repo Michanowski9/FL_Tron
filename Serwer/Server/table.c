@@ -3,7 +3,6 @@
 #include "../structs.h"
 #include "serverReceive.h"
 #include <pthread.h>
-#define BOARD_SIZE 8
 
 
 
@@ -104,7 +103,7 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 				}
 				break;
 		}
-		board->tile[y][x]=player->value;
+		board->tile[player->pos.y][player->pos.x]=player->value;
 
 	}
 	return player->alive;
@@ -166,7 +165,7 @@ void* TurnBoardOn(void*arg){
 		
 		pthread_mutex_unlock(board->sem); //UNLOCK SEM
 		//sleep(1);
-		usleep(100000);
+		usleep(200000);
 	
 	}
 
