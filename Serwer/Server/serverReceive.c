@@ -40,15 +40,19 @@ void* startListening(void* arg){
 			switch(key){//ROZPATRZENIE KLAWISZA OD KLIENTA
 		       		case KEY_UP:
 					printf("hit w!\n");
+					player->direction = UP;
 				 	break;
 		       		case KEY_DOWN: 
 					printf("hit s!\n");
+					player->direction = DOWN;
 					break;
 		       		case KEY_LEFT: 
 					printf("hit a!\n");
+					player->direction = LEFT;
 					break;
 		       		case KEY_RIGHT: 
 					printf("hit d!\n");
+					player->direction = RIGHT;
 					break;
 				case(' '): 
 					printf("hit  !\n");
@@ -66,7 +70,7 @@ void* startListening(void* arg){
 
 //wysyla poczatkowy stan stolu
 //w ten sposob: X I Y to koordynaty poczatkowe kolejnych graczy
-//BOARD  X1 Y1  X2 Y2 ... XN YN
+//BOARD SIZE  X1 Y1  X2 Y2 ... XN YN
 //
 //args:
 //socketInput - socket przez ktory wyslac
@@ -78,9 +82,19 @@ void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, i
 	memset(buffer,0,MAX_MESSAGE_SIZE);
 	strcpy(buffer,"BOARD ");
 
+	char numb[10];
+	memset(numb,0,10);//pusty string
+	sprintf(numb,"%d",boardSize); //size
+	strcat(buffer,numb);		
+	strcat(buffer," ");
+
+	memset(numb,0,10);//pusty string
+	sprintf(numb,"%d",playersNumber); //playersNumber
+	strcat(buffer,numb);		
+	strcat(buffer," ");
+
 	//dodanie init positions
 	for(int i=0;i<playersNumber;i++){
-		char numb[10];
 		memset(numb,0,10);//pusty string
 		sprintf(numb,"%d",initPositions[i].x); //x pos
 		strcat(buffer,numb);		
@@ -92,7 +106,7 @@ void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, i
 		strcat(buffer," ");
 
 	}
-	
+	printf("buffer: %s",buffer);
 
 	send(socketInput,buffer,strlen(buffer),0);
 }
@@ -136,6 +150,8 @@ void sendDifference(int socketInput, Difference* difference, int n){
 		strcat(buffer,numb);		
 		strcat(buffer," ");
 	}
+
+	printf("%s\n",buffer);
 
 	send(socketInput,buffer,strlen(buffer),0);
 }
