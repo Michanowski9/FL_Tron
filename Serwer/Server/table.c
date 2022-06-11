@@ -35,9 +35,29 @@ void SendInitPositions(Board* board, Position* initPositions){
 	}
 }
 
+void SendEndGameSignal(Board* board){
+	for(int i=0;i<board->maxPlayersNumber;i++){
+		endGame(board->players[i]->socket);
+	}
+}
 
 
+void CleanTable(Board* board){
+	//zerujemy pola
+	for(int i=0; i < board->size; i++){
+		for(int j=0; j<board->size; j++){
+			board->tile[i][j] = 0;
+		}
+	}
 
+	//usuwamy graczy
+	
+	for(int i=0; i<board->maxPlayersNumber; i++){
+		free(board->players[i]);
+	}
+	
+	board->playersNumber = 0;
+}
 	
 enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNumber, Board* board){
 	int x=player->pos.x;
@@ -110,64 +130,93 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 }
 
 
+//sprawdza czy gra trwa
+//czyli, czy jest wiecej niz jeden gracz zyje
+bool gameRunning(Board* board){
+	int alivePlayers = 0;
+	for (int i=0; i<board->maxPlayersNumber; i++){
+		if(board->players[i]->alive){
+			alivePlayers++;
+		}
+	}
+
+	if(alivePlayers > 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+	
+}
+
+
 //tu jest glowna petla stolu
 void* TurnBoardOn(void*arg){
         Board* board=((Argument*)arg)->board; //RZUTOWANIE I ODCZYT
         free((Argument*)arg);//MILE zwalnianie pamieci
 
 
-	//ODTAD LOGIKA STOLU BO TO STOL CZEKA NA GRACZY
-	bool waitingForPlayers = true;
-	while(waitingForPlayers){
-		//SPRAWDZENIE CZY FULL
-		pthread_mutex_lock(board->sem); //LOCK SEM
-		
-		if(board->playersNumber == board->maxPlayersNumber){
-			waitingForPlayers = false;
-		}
-
-		pthread_mutex_unlock(board->sem); //UNLOCK SEM
-
-	}
-
-
-	//przygotowanie init pozycji
-	Position* initPositions  = createInitPositions(board);
-
-	//WYSYLAMY INFO O STOLE (POZYCJE) do kazdego gracza
-	SendInitPositions(board,initPositions);
-	sleep(1);
-
-	//WYSYLAMY SYGNAL STARTU GRY
-	for(int i=0;i<board->maxPlayersNumber;i++){
-		startGame(board->players[i]->socket);
-	}
-
 	//A TU PETLA GRY
 	Difference* diffs;
 	diffs = (Difference*)malloc(sizeof(Difference)*board->maxPlayersNumber);
 	int diffNumber;
-	for(;;){ //dopoki liczba zyjacych graczy != 1
-		
-		pthread_mutex_lock(board->sem); //LOCK SEM
-		diffNumber = 0;
-		for(int i=0; i<board->maxPlayersNumber; i++){
-			if(MovePlayer(board->players[i], diffs, &diffNumber,board) == DEAD){
-				//dead
+	for(;;){ // petla bez konca, dopoki serwer nie zostanie zamkniety
+
+		//ODTAD LOGIKA STOLU BO TO STOL CZEKA NA GRACZY
+		bool waitingForPlayers = true;
+		while(waitingForPlayers){
+			//SPRAWDZENIE CZY FULL
+			pthread_mutex_lock(board->sem); //LOCK SEM
+			
+			if(board->playersNumber == board->maxPlayersNumber){
+				waitingForPlayers = false;
 			}
+
+			pthread_mutex_unlock(board->sem); //UNLOCK SEM
+
 		}
 
+		//przygotowanie init pozycji
+		Position* initPositions  = createInitPositions(board);
 
-		
+		//WYSYLAMY INFO O STOLE (POZYCJE) do kazdego gracza
+		SendInitPositions(board,initPositions);
+		sleep(1);
+
+		//WYSYLAMY SYGNAL STARTU GRY
 		for(int i=0;i<board->maxPlayersNumber;i++){
-			sendDifference(board->players[i]->socket,diffs,diffNumber);
+			startGame(board->players[i]->socket);
 		}
+
+
+
+
+		for(;gameRunning(board);){ //dopoki liczba zyjacych graczy != 1		
+			pthread_mutex_lock(board->sem); //LOCK SEM
+			diffNumber = 0;
+			for(int i=0; i<board->maxPlayersNumber; i++){
+				if(MovePlayer(board->players[i], diffs, &diffNumber,board) == DEAD){
+					//dead
+				}
+			}
+
+
+			
+			for(int i=0;i<board->maxPlayersNumber;i++){
+				sendDifference(board->players[i]->socket,diffs,diffNumber);
+			}
+			
+			pthread_mutex_unlock(board->sem); //UNLOCK SEM		
+			usleep(100000);
 		
-		pthread_mutex_unlock(board->sem); //UNLOCK SEM
-		//sleep(1);
-		usleep(200000);
-	
+		}
+		//informujemy o zakonczeniu gry
+		SendEndGameSignal(board);
+		//czyszczenie stolu, gdy gra sie zakonczyla
+		CleanTable(board);
 	}
+
+	printf("table closed\n");
 
 	return 0;
 }      

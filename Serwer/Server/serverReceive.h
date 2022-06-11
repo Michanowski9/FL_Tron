@@ -6,6 +6,7 @@ void* startListening(void* arg);
 void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, int playersNumber);
 
 void startGame(int socketInput);
+void endGame(int socketInput);
 
 void sendDifference(int socketInput, Difference* difference, int n);
 

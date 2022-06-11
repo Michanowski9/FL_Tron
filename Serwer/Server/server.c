@@ -12,9 +12,9 @@
 
 #define HTONS 3001
 
-#define MAX_PLAYERS 2
+#define MAX_PLAYERS 1
 #define MAX_MESSAGE_SIZE 80
-#define TABLE_SIZE 20
+#define TABLE_SIZE 32
 
 
 //utworzenie watku stolu
@@ -48,50 +48,75 @@ Board* CreateBoard(int maxPlayers){
 }
 
 
+Player* initPlayer(int socketInput, Board* board){
+	Player *player = (Player*)malloc(sizeof(Player));
+	player->index = board->playersNumber;
+	player->socket = socketInput;
+	player->alive = true;
+	return player;
+}
+
+
+
+bool fullTable(Board* board){
+	bool isFull;
+	pthread_mutex_lock(board->sem); // LOCK
+	if(board->playersNumber == board->maxPlayersNumber){
+		isFull = true;
+	}
+	else{
+		isFull = false;
+	}
+	pthread_mutex_unlock(board->sem); // UNLOCk
+	return isFull;
+}
+
 void Join(int socketInput,Board* board){
 	//szukanie stolu
 	char buffer[MAX_MESSAGE_SIZE]; //BUFFER NA WIADOMOSCI
 	bool found=false;
 
-	if(board->playersNumber <= board->maxPlayersNumber){
+	if(board->playersNumber < board->maxPlayersNumber){
 		found = true;
 	}
-
-
-	if(found == true){ //BYLO WOLNE MIEJSCE
-		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
-		strcpy(buffer,"OK JOIN"); 
-		send(socketInput,buffer,strlen(buffer),0);//WYSYLANIE POTWIERDZENIA
-		
-		//INICJALIZACJA GRACZA
-		Player *player = (Player*)malloc(sizeof(Player));
-		player->index = board->playersNumber;
-		player->socket = socketInput;
-
-		Argument *arg = (Argument*)malloc(sizeof(Argument));
-		arg->socketOutput=socketInput;
-		arg->player = player;
-		arg->sem=board->sem; //ten sam semafor co stol
-
-		//dodanie gracza do stolu
-		board->players[board->playersNumber] = player;
-		
-		pthread_mutex_lock(board->sem);
-		board->playersNumber++;
-		pthread_mutex_unlock(board->sem);
-
-
-		//utworzenie watku sluchajacego.
-		pthread_t thread_id;
-		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
-	}
 	else{
-		//PELNY STOL
+		//send waiting notification
 		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
-		strcpy(buffer,"NO FREE TABLE");
+		strcpy(buffer,"WAIT_FOR_FREE_SLOT");
 		send(socketInput,buffer,strlen(buffer),0);
-		sleep(1);
+
 	}
+	
+	while(fullTable(board)){
+		//wait simply
+		sleep(1);		
+	}
+
+	//WYCZEKANO WOLNE MIEJSCE
+	memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
+	strcpy(buffer,"OK JOIN"); 
+	send(socketInput,buffer,strlen(buffer),0);//WYSYLANIE POTWIERDZENIA
+	
+	//INICJALIZACJA GRACZA
+	Player *player =initPlayer(socketInput,board);
+
+	Argument *arg = (Argument*)malloc(sizeof(Argument));
+	arg->socketOutput=socketInput;
+	arg->player = player;
+	arg->sem=board->sem; //ten sam semafor co stol
+
+	//dodanie gracza do stolu
+	board->players[board->playersNumber] = player;
+	
+	pthread_mutex_lock(board->sem);
+	board->playersNumber++;
+	pthread_mutex_unlock(board->sem);
+
+
+	//utworzenie watku sluchajacego.
+	pthread_t thread_id;
+	pthread_create(&thread_id,NULL,&startListening,(void*)arg);
+	
 }
 
 
@@ -119,7 +144,8 @@ int main(int argc, char *argv[]){
 		printf("server: binding error %d %s\n",errno,strerror(errno));
 	}
 	else{
-		for(;;){
+		
+		for(;;){//petla akceptowania polaczen, z zalozenia bez konca
 			//czekanie na polaczenie
 			printf("server: waiting for connection\n");
 			listen(listenfd, 10);
