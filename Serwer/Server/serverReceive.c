@@ -120,6 +120,15 @@ void startGame(int socketInput){
 	send(socketInput,buffer,strlen(buffer),0);
 }
 
+
+
+void endGame(int socketInput){
+	char buffer[MAX_MESSAGE_SIZE];
+	memset(buffer,0,MAX_MESSAGE_SIZE);//zerowanie stringa
+	strcpy(buffer,"END_GAME ");
+	send(socketInput,buffer,strlen(buffer),0);
+}
+
 //wysylka zmian na planszy 
 //DIFF N X1 Y1 VAL1 ... XN YN VALN
 //difference - tablica zmian typu Difference o dlugosci n
