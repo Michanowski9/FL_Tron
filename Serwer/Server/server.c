@@ -6,15 +6,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <pthread.h>
-#include<errno.h>
+#include <errno.h>
 
 #include "table.h"
 
 #define HTONS 3001
 
-#define MAX_PLAYERS 1
+#define MAX_PLAYERS 2
 #define MAX_MESSAGE_SIZE 80
-#define TABLE_SIZE 8
+#define TABLE_SIZE 20
 
 
 //utworzenie watku stolu
@@ -32,7 +32,7 @@ Board* CreateBoard(int maxPlayers){
 	for(int i=0;i<TABLE_SIZE;i++){
 		table->tile[i] = (int*)malloc(sizeof(int)*TABLE_SIZE); // A TU NA KAŻDY WIERSZ
 		for(int j=0;j<TABLE_SIZE;j++){
-			table->tile[i][j]=0;   //USTAWIENIE POLA JAKO PUSTEGO
+			table->tile[i][j] = 0;   //USTAWIENIE POLA JAKO PUSTEGO
 		}
 	}
 

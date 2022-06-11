@@ -1,3 +1,5 @@
+#ifndef _STRUCTS_H_
+#define _STRUCTS_H_
 #include <stdbool.h>
 typedef struct Position{
 	int x;
@@ -10,11 +12,21 @@ typedef struct Difference{
 	int val;
 }Difference;
 
+typedef enum Direction{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+} Direction;
+
 typedef struct Player{
 	char* nick; //max size 10
 	Position pos;
 	int index; //in table of players!
+	int value;
 	int socket;
+	Direction direction;
+	bool alive;
 }Player;
 
 typedef struct Board{
@@ -36,3 +48,9 @@ typedef struct Argument{
 }Argument;
 
 
+enum PlayerState{
+	ALIVE,
+	DEAD
+};
+
+#endif 
