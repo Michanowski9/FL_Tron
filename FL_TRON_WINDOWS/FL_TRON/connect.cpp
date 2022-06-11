@@ -52,33 +52,40 @@ int connectToServer() {
 //w przeciwnym razie FREE_TABLE_NOT_FOUND
 int join(int socketInput) {
 	char buffer[MAX_MESSAGE_SIZE];
+	bool canJoin = false;
 	strcpy(buffer, "join ");
 
 	send(socketInput, buffer, (int)strlen(buffer), 0);
 
-	memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
-	recv(socketInput, buffer, MAX_MESSAGE_SIZE, 0);
-	printf("client: server respone: %s\n", buffer);
-	if (strcmp(buffer, "OK JOIN") == 0) {
-		printf("client: joined: \n");
-	}
-	else {
-		if (strncmp(buffer, "NO FREE TABLE", strlen("NO FREE TABLE")) == 0) {
-			printf("client: no free table\n");
-			return FREE_TABLE_NOT_FOUND;
+	while (canJoin == false) {
+		memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
+		recv(socketInput, buffer, MAX_MESSAGE_SIZE, 0);
+		printf("client: server respone: %s\n", buffer);
+		if (strcmp(buffer, "OK JOIN") == 0) {
+			printf("client: joined: \n");
+			return 0;
 		}
+		else if (strncmp(buffer, "NO FREE TABLE", strlen("NO FREE TABLE")) == 0) {
+				printf("client: no free table\n");
+				return FREE_TABLE_NOT_FOUND;
+		}
+		if (strncmp(buffer, "WAIT_FOR_FREE_SLOT", 18) == 0) {
+			//wydrukowaæ info,
+			//¿e trzeba chwilê poczekaæ
+			printf("Need to wait\n");
+		}
+		
 	}
-
 
 	return 0;
 
 }
 
 /// <summary>
-/// wysyÅ‚a wciÅ›niey klawisz do serwera
+/// wysy³a wciœniey klawisz do serwera
 /// </summary>
-/// <param name="socketInput">socket poÅ‚Ä…czeniowy</param>
-/// <param name="key">char wciÅ›niÄ™tego znaku</param>
+/// <param name="socketInput">socket po³¹czeniowy</param>
+/// <param name="key">char wciœniêtego znaku</param>
 void sendInput(SOCKET socketInput, char key) {
 	char buffer[MAX_MESSAGE_SIZE];
 	strcpy(buffer, "INPUT ");
@@ -90,13 +97,80 @@ void sendInput(SOCKET socketInput, char key) {
 
 
 /// <summary>
-/// wÄ…tek nasÅ‚uchujÄ…cy, modyfikujÄ…cy dane w tle
+/// zczytuje ró¿nice planszy z wiadomosci i wysy³a do gry
+/// </summary>
+/// <param name="gamePtr"> wskaŸnik na grê</param>
+void getDiff(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
+	int N = buffer[5] - '0';//zalozenie ze liczba graczy jest jednocyfrowa
+	int bufIndex = 6;
+
+	for (int i = 0; i < N; i++) {
+		if (buffer[i] != ' ') {
+			int x, y, val;
+
+#ifdef TEST_OUTPUT
+			printf("buf=%d\n", bufIndex);
+#endif // TEST_OUTPUT
+
+			x = atoi(&buffer[bufIndex]);
+			bufIndex = getNextSpaceBar(buffer, bufIndex);
+			y = atoi(&buffer[bufIndex]);
+			bufIndex = getNextSpaceBar(buffer, bufIndex);
+			val = atoi(&buffer[bufIndex]);
+			bufIndex = getNextSpaceBar(buffer, bufIndex);
+#ifdef TEST_OUTPUT
+			printf("x=%d,y=%d,val=%d\n", x, y, val);
+#endif // TEST_OUTPUT
+
+			//board->tile[y][x] = val;
+			gamePtr->AddToRedraw(Point(x, y), val);
+
+		}
+	}
+}
+
+
+void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
+	int tableSize;
+	int bufIndex = 6;
+	tableSize = atoi(&buffer[bufIndex]);				//pobranie Mapsize
+	bufIndex = getNextSpaceBar(buffer, bufIndex);
+
+
+	gamePtr->SetMapSize(tableSize);
+
+	//odczytanie liczby graczy
+	int maxPlayer;
+	maxPlayer = atoi(&buffer[bufIndex]);				//pobranie maxPlayer
+	bufIndex = getNextSpaceBar(buffer, bufIndex);
+
+	for (int i = 0; i < maxPlayer; i++) {
+		Point pos;
+		pos.x = atoi(&buffer[bufIndex]);				//pobranie pos
+		bufIndex = getNextSpaceBar(buffer, bufIndex);
+		pos.y = atoi(&buffer[bufIndex]);				//pobranie pos
+		bufIndex = getNextSpaceBar(buffer, bufIndex);		
+		gamePtr->AddToRedraw(Point(pos.x, pos.y), i + 1);
+	}
+}
+
+
+void startGame(bool*  gameStarted) {
+
+	//jeœli dasz tê zmienn¹ do klasy gra, to usuñ w 
+	//funkcji turnOnReceiveSocket() zmienn¹ gameStarted i w structs.h ze struktury Argument
+	*gameStarted = 1;
+}
+
+
+/// <summary>
+/// w¹tek nas³uchuj¹cy, modyfikuj¹cy dane w tle
 /// </summary>
 /// <param name="arg"></param>
 /// <returns></returns>
 DWORD WINAPI turnOnReceiveSocket(void* arg) {
 	auto socketConnected = true; //stan polaczenia
-	//wczytanie argumentÃ³w
+	//wczytanie argumentów
 	auto socketOutput = ((Argument*)arg)->socketOutput;
 	auto gameStarted = ((Argument*)arg)->gameStarted;
 	auto gamePtr = ((Argument*)arg)->game;
@@ -104,10 +178,10 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 	delete arg;
 
-	while (socketConnected) {//jest utrzymane poÅ‚Ä…czenie
+	while (socketConnected) {//jest utrzymane po³¹czenie
 		char buffer[MAX_MESSAGE_SIZE] = {};
 		if (recv(socketOutput, buffer, MAX_MESSAGE_SIZE, 0) == 0) { //jesli nic nie odebrano(czyli blad)
-			//to znaczy ze poÅ‚Ä…czenie zostaÅ‚o zerwane
+			//to znaczy ze po³¹czenie zosta³o zerwane
 			socketConnected = false;
 		}
 
@@ -117,60 +191,17 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 		//sygnal zmiany planszy		
 		if (strncmp(buffer, "DIFF", 4) == 0) {
-			int N = buffer[5] - '0';//zalozenie ze liczba graczy jest jednocyfrowa
-			int bufIndex = 6;
-			
-			for (int i = 0; i < N; i++) {
-				if (buffer[i] != ' ') {
-					int x, y, val;
-
-#ifdef TEST_OUTPUT
-					printf("buf=%d\n", bufIndex);
-#endif // TEST_OUTPUT
-
-					x = atoi(&buffer[bufIndex]);
-					bufIndex = getNextSpaceBar(buffer, bufIndex);
-					y = atoi(&buffer[bufIndex]);
-					bufIndex = getNextSpaceBar(buffer, bufIndex);
-					val = atoi(&buffer[bufIndex]);
-					bufIndex = getNextSpaceBar(buffer, bufIndex);
-#ifdef TEST_OUTPUT
-					printf("x=%d,y=%d,val=%d\n", x, y, val);
-#endif // TEST_OUTPUT
-
-					//board->tile[y][x] = val;
-					gamePtr->AddToRedraw(Point(x, y), val);
-					
-				}				
-			}
+			getDiff(buffer, gamePtr);
 		}
 		//INIT BOARD
 		else if (strncmp(buffer, "BOARD", 5) == 0) {
-			int tableSize; 
-			int bufIndex = 6;
-			tableSize = atoi(&buffer[bufIndex]);				//pobranie Mapsize
-			bufIndex = getNextSpaceBar(buffer, bufIndex);
-
-
-			gamePtr->SetMapSize(tableSize);
-
-			//odczytanie liczy graczy
-			int maxPlayer;
-			maxPlayer = atoi(&buffer[bufIndex]);				//pobranie maxPlayer
-			bufIndex = getNextSpaceBar(buffer, bufIndex);
-			
-			for (int i = 0; i < maxPlayer; i++) {
-				Point pos;
-				pos.x = atoi(&buffer[bufIndex]);				//pobranie pos
-				bufIndex = getNextSpaceBar(buffer, bufIndex); 
-				pos.y = atoi(&buffer[bufIndex]);				//pobranie pos
-				bufIndex = getNextSpaceBar(buffer, bufIndex);
-				//board->tile[pos.y][pos.x] = i+1; //aktualizacja mapy
-				gamePtr->AddToRedraw(Point(pos.x, pos.y), i + 1);
-			}
+			initBoard(buffer, gamePtr);
 		}
 		else if (strncmp(buffer, "START_GAME", 10) == 0) {
-			*gameStarted = true;
+			startGame(gameStarted);			
+		}
+		else if (strncmp(buffer, "END_GAME", 8) == 0) {
+			//endGame()
 		}
 	}
 	return NULL;
@@ -178,10 +209,10 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 
 
 /// <summary>
-/// funkcja tworzÄ…ca nowy wÄ…tek, bo przesyÅ‚anie wielu argumentÃ³w to wrzÃ³d na dupie
+/// funkcja tworz¹ca nowy w¹tek, bo przesy³anie wielu argumentów to wrzód na dupie
 /// </summary>
 /// <param name="socket">socket komunikacyjny</param>
-/// <param name="board">adres stoÅ‚u</param>
+/// <param name="board">adres sto³u</param>
 /// <param name="player">adres gracza(</param>
 /// <param name="gameStarted">adres bola czy gra sie ma juz zaczac</param>
 /// <param name="sem">adres semafora</param>
