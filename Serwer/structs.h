@@ -13,6 +13,7 @@ typedef struct Difference{
 }Difference;
 
 typedef enum Direction{
+	NONE_DIRECTION,
 	UP,
 	DOWN,
 	LEFT,
@@ -26,6 +27,7 @@ typedef struct Player{
 	int value;
 	int socket;
 	Direction direction;
+	Direction lastDirection;
 	bool alive;
 }Player;
 
@@ -36,6 +38,7 @@ typedef struct Board{
 	int playersNumber;
 	int maxPlayersNumber;
 	pthread_mutex_t* sem;
+	bool runningGame;
 }Board;
 
 

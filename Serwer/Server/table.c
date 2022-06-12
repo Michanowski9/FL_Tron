@@ -31,13 +31,15 @@ Position* createInitPositions(Board* board){
 
 void SendInitPositions(Board* board, Position* initPositions){
 	for(int i=0;i<board->maxPlayersNumber;i++){
-		sendInitialBoard(board->players[i]->socket,board->size,initPositions,board->maxPlayersNumber);
+		board->players[i]->index = i;
+		sendInitialBoard(board->players[i]->socket,board->players[i]->index, board->size,
+				initPositions,board->maxPlayersNumber);
 	}
 }
 
 void SendEndGameSignal(Board* board){
 	for(int i=0;i<board->maxPlayersNumber;i++){
-		endGame(board->players[i]->socket);
+		endGame(board->players[i]->socket, board->players[i]->alive);
 	}
 }
 
@@ -73,6 +75,7 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 				}
 				else{					
 					player->pos.y -= 1;
+					player->lastDirection = UP;
 					differences[*diffNumber].val = player->value;
 					differences[*diffNumber].x = player->pos.x;
 					differences[*diffNumber].y = player->pos.y;
@@ -88,6 +91,7 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 				}
 				else{
 					player->pos.y += 1;
+					player->lastDirection = DOWN;
 					differences[*diffNumber].val = player->value;
 					differences[*diffNumber].x = player->pos.x;
 					differences[*diffNumber].y = player->pos.y;
@@ -102,6 +106,7 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 				}
 				else{
 					player->pos.x -= 1;
+					player->lastDirection = LEFT;
 					differences[*diffNumber].val = player->value;
 					differences[*diffNumber].x = player->pos.x;
 					differences[*diffNumber].y = player->pos.y;
@@ -116,6 +121,7 @@ enum PlayerState MovePlayer(Player* player, Difference* differences, int *diffNu
 				}
 				else{
 					player->pos.x += 1;
+					player->lastDirection = RIGHT;
 					differences[*diffNumber].val = player->value;
 					differences[*diffNumber].x = player->pos.x;
 					differences[*diffNumber].y = player->pos.y;
@@ -181,13 +187,14 @@ void* TurnBoardOn(void*arg){
 
 		//WYSYLAMY INFO O STOLE (POZYCJE) do kazdego gracza
 		SendInitPositions(board,initPositions);
-		sleep(1);
+		sleep(2);
 
+		board->runningGame = true;
 		//WYSYLAMY SYGNAL STARTU GRY
 		for(int i=0;i<board->maxPlayersNumber;i++){
 			startGame(board->players[i]->socket);
 		}
-
+		
 
 
 
@@ -214,6 +221,7 @@ void* TurnBoardOn(void*arg){
 		SendEndGameSignal(board);
 		//czyszczenie stolu, gdy gra sie zakonczyla
 		CleanTable(board);
+		board->runningGame = false;
 	}
 
 	printf("table closed\n");

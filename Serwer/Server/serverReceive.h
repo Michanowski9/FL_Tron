@@ -3,10 +3,10 @@
 
 void* startListening(void* arg);
 
-void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, int playersNumber);
+void sendInitialBoard(int socketInput,int playerIndex, int boardSize, Position* initPositions, int playersNumber);
 
 void startGame(int socketInput);
-void endGame(int socketInput);
+void endGame(int socketInput,bool alive);
 
 void sendDifference(int socketInput, Difference* difference, int n);
 

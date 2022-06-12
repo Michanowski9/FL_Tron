@@ -53,6 +53,8 @@ Player* initPlayer(int socketInput, Board* board){
 	player->index = board->playersNumber;
 	player->socket = socketInput;
 	player->alive = true;
+	player->direction = DOWN;
+	player->lastDirection = NONE_DIRECTION;
 	return player;
 }
 
@@ -74,12 +76,8 @@ bool fullTable(Board* board){
 void Join(int socketInput,Board* board){
 	//szukanie stolu
 	char buffer[MAX_MESSAGE_SIZE]; //BUFFER NA WIADOMOSCI
-	bool found=false;
 
-	if(board->playersNumber < board->maxPlayersNumber){
-		found = true;
-	}
-	else{
+	if(board->playersNumber == board->maxPlayersNumber){	
 		//send waiting notification
 		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
 		strcpy(buffer,"WAIT_FOR_FREE_SLOT");
@@ -104,19 +102,29 @@ void Join(int socketInput,Board* board){
 	arg->socketOutput=socketInput;
 	arg->player = player;
 	arg->sem=board->sem; //ten sam semafor co stol
-
-	//dodanie gracza do stolu
-	board->players[board->playersNumber] = player;
+	arg->board = board;
 	
-	pthread_mutex_lock(board->sem);
-	board->playersNumber++;
-	pthread_mutex_unlock(board->sem);
+	if(recv(socketInput, buffer, 80,0) != 0){//jest jeszce polaczenie
+	//klient wyslal sygnal OK JOINING
+		//dodanie gracza do stolu
+		pthread_mutex_lock(board->sem);
+
+		board->players[board->playersNumber] = player;
+		player->index = board->playersNumber;
+
+		board->playersNumber++;
+		pthread_mutex_unlock(board->sem);
 
 
-	//utworzenie watku sluchajacego.
-	pthread_t thread_id;
-	pthread_create(&thread_id,NULL,&startListening,(void*)arg);
-	
+		//utworzenie watku sluchajacego.
+		pthread_t thread_id;
+		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
+	}
+	else{//polaczenie zerwane
+		free(player);
+		free(arg);
+	}
+		
 }
 
 

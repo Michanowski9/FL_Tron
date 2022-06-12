@@ -20,6 +20,7 @@ void* startListening(void* arg){
 	Player* player = ((Argument*)arg)->player;
 	int listenSocket = ((Argument*)arg)->socketOutput;
 	pthread_mutex_t* sem = ((Argument*)arg)->sem;
+	Board* board = ((Argument*)arg)->board;
 	free((Argument*) arg);
 	
 	bool socketConnected = true;
@@ -39,20 +40,28 @@ void* startListening(void* arg){
 			pthread_mutex_lock(sem);//LOCK SEM
 			switch(key){//ROZPATRZENIE KLAWISZA OD KLIENTA
 		       		case KEY_UP:
-					printf("hit w!\n");
-					player->direction = UP;
+					if(player->lastDirection != DOWN){
+						printf("hit w!\n");
+						player->direction = UP;
+					}
 				 	break;
 		       		case KEY_DOWN: 
-					printf("hit s!\n");
-					player->direction = DOWN;
+					if(player->lastDirection != UP){
+						printf("hit s!\n");
+						player->direction = DOWN;
+					}
 					break;
 		       		case KEY_LEFT: 
-					printf("hit a!\n");
-					player->direction = LEFT;
+					if(player->lastDirection != RIGHT){
+						printf("hit a!\n");
+						player->direction = LEFT;
+					}
 					break;
 		       		case KEY_RIGHT: 
-					printf("hit d!\n");
-					player->direction = RIGHT;
+					if(player->lastDirection != LEFT){
+						printf("hit d!\n");
+						player->direction = RIGHT;
+					}
 					break;
 				case(' '): 
 					printf("hit  !\n");
@@ -62,6 +71,27 @@ void* startListening(void* arg){
 			
 		}				
 	}
+	
+	if(board->runningGame == false){ //czyszczenie gracza w lobby
+		Player* temp;
+		free(player);
+		pthread_mutex_lock(sem);//LOCK SEM
+			//swapujemy od lewej do konca
+			for(int i=player->index; i< board->maxPlayersNumber - 2;  i++){
+				//swap
+				temp = board->players[i];
+				board->players[i] = board->players[i+1];
+				board->players[i+1] = temp;
+			}
+			board->playersNumber--; 
+			if(board->playersNumber < 0){
+				board->playersNumber =0;
+			}
+			printf("cleaned player\n");
+		pthread_mutex_unlock(sem);//UNLOCK SEM	
+
+	}
+
 	printf("server listening socket close\n");
 	close(listenSocket);
 	return NULL;
@@ -70,13 +100,13 @@ void* startListening(void* arg){
 
 //wysyla poczatkowy stan stolu
 //w ten sposob: X I Y to koordynaty poczatkowe kolejnych graczy
-//BOARD SIZE  X1 Y1  X2 Y2 ... XN YN
+//BOARD SIZE PLAYERS_NUMBER PLAYER_INDEX X1 Y1  X2 Y2 ... XN YN
 //
 //args:
 //socketInput - socket przez ktory wyslac
 //boardSize - rozmiar planszy
 //initPosition - tablcia poczatkowych pozycji o dlugosci playersNumber
-void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, int playersNumber){
+void sendInitialBoard(int socketInput,int playerIndex, int boardSize, Position* initPositions, int playersNumber){
 	
 	char buffer[MAX_MESSAGE_SIZE];
 	memset(buffer,0,MAX_MESSAGE_SIZE);
@@ -93,6 +123,12 @@ void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, i
 	strcat(buffer,numb);		
 	strcat(buffer," ");
 
+	memset(numb,0,10);//pusty string
+	sprintf(numb,"%d",playerIndex); //playerIndex =>kolor
+	strcat(buffer,numb);		
+	strcat(buffer," ");
+
+
 	//dodanie init positions
 	for(int i=0;i<playersNumber;i++){
 		memset(numb,0,10);//pusty string
@@ -106,7 +142,7 @@ void sendInitialBoard(int socketInput, int boardSize, Position* initPositions, i
 		strcat(buffer," ");
 
 	}
-	printf("buffer: %s",buffer);
+	printf("buffer: %s\n",buffer);
 
 	send(socketInput,buffer,strlen(buffer),0);
 }
@@ -121,11 +157,19 @@ void startGame(int socketInput){
 }
 
 
-
-void endGame(int socketInput){
+//wysyla sygnal konca gry wraz informacja czy 
+//gracz wygral
+//1-wygral
+//0-przegral
+void endGame(int socketInput, bool alive){
 	char buffer[MAX_MESSAGE_SIZE];
 	memset(buffer,0,MAX_MESSAGE_SIZE);//zerowanie stringa
-	strcpy(buffer,"END_GAME ");
+	if(alive){
+		strcpy(buffer,"END_GAME 1 ");
+	}
+	else{
+		strcpy(buffer,"END_GAME 0 ");
+	}
 	send(socketInput,buffer,strlen(buffer),0);
 }
 
