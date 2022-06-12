@@ -62,6 +62,9 @@ int join(int socketInput) {
 		recv(socketInput, buffer, MAX_MESSAGE_SIZE, 0);
 		printf("client: server respone: %s\n", buffer);
 		if (strcmp(buffer, "OK JOIN") == 0) {
+			memset(buffer, 0, MAX_MESSAGE_SIZE);//czyszczenie bufora
+			strcat(buffer, "OK JOINING");
+			send(socketInput, buffer, (int)strlen(buffer), 0);//wysylanie informacji, by serwer wiedzia³, ¿e klient ca³y jest pod³¹czony
 			printf("client: joined: \n");
 			return 0;
 		}
@@ -144,6 +147,18 @@ void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
 	maxPlayer = atoi(&buffer[bufIndex]);				//pobranie maxPlayer
 	bufIndex = getNextSpaceBar(buffer, bufIndex);
 
+	//odczytanie koloru gracza   playerIndex = kolor gracza-1
+	int playerColor;
+	playerColor = atoi(&buffer[bufIndex]);				//pobranie playerIndex
+	playerColor++;
+
+	//TODO 
+	//WYRYSOWANIE KOLORU GDZIEŒ NA EKRANIE
+	printf("kolor = %d", playerColor);
+	//
+
+	bufIndex = getNextSpaceBar(buffer, bufIndex);
+
 	for (int i = 0; i < maxPlayer; i++) {
 		Point pos;
 		pos.x = atoi(&buffer[bufIndex]);				//pobranie pos
@@ -161,7 +176,17 @@ void startGame(bool*  gameStarted) {
 	//funkcji turnOnReceiveSocket() zmienn¹ gameStarted i w structs.h ze struktury Argument
 	*gameStarted = 1;
 }
-
+void endGame(char buffer[MAX_MESSAGE_SIZE]) {
+	bool won = buffer[9] - '0'; //zrzutowanie 1 na true, i 0 na false
+	if (won) {
+		//wygrana
+		printf("YOU WON");
+	}
+	else {
+		//przegrana
+		printf("YOU LOST");
+	}
+}
 
 /// <summary>
 /// w¹tek nas³uchuj¹cy, modyfikuj¹cy dane w tle
@@ -201,7 +226,8 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 			startGame(gameStarted);			
 		}
 		else if (strncmp(buffer, "END_GAME", 8) == 0) {
-			//endGame()
+			endGame(buffer);
+			closesocket(socketOutput); //zamkniêcie socketu
 		}
 	}
 	return NULL;
