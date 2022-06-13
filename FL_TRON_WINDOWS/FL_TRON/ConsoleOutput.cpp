@@ -16,6 +16,7 @@ void ConsoleOutput::DrawCell(int x, int y, int number)
 	printf(fill.c_str());
 
 	this->SetColor(COLORS::BLACK);
+	this->SetCursorPosition(75, 5);
 }
 
 void ConsoleOutput::SetCursorPosition(int x, int y) {
@@ -32,9 +33,9 @@ const byte ConsoleOutput::NumberToColor(int number) const
 {
 	switch (number) {
 	case 0:
-		return COLORS::BLUE;
-	case 1:
 		return COLORS::WHITE;
+	case 1:
+		return COLORS::BLUE;
 	case 2:
 		return COLORS::GREEN;
 	case 3:
@@ -42,9 +43,19 @@ const byte ConsoleOutput::NumberToColor(int number) const
 	case 4:
 		return COLORS::YELLOW;
 	case 5:
+		return COLORS::DARK_BLUE;
+	case 6:
+		return COLORS::DARK_PURPLE;
+	case 7:
+		return COLORS::LIGHT_BLUE;
+	case 8:
+		return COLORS::LIGHT_RED;
+	case 9:
+		return COLORS::RED;
+	case 10:
 		return COLORS::GOLD;
 	default:
-		return COLORS::RED;
+		return COLORS::WHITE;
 	}
 }
 

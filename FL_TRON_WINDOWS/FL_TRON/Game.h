@@ -34,11 +34,13 @@ public:
 	
 	void AddToRedraw(Point point, int value);
 
+	void PrintStartGame();
+
 	void DrawMap();
 	void MainLoop();
 private:
 	void AllocateMap();
-
+	void WriteStart(int color);
 	void Update();
 	void RedrawPartOfMap();
 

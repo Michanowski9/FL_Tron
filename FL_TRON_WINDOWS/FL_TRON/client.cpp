@@ -56,9 +56,9 @@ int main (int argc, char *argv[]){
 			while(!GameStarted(&sem,&gameStarted)) {
 				Sleep(1);
 			}
-			printf("game started!\n");
 
-			
+			gamePtr->PrintStartGame();
+						
 			gamePtr->StartInputHandling(socketInput);
 			gamePtr->MainLoop();
 		}

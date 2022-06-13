@@ -58,7 +58,7 @@ void Game::StartInputHandling(SOCKET socket)
 				sendInput(socket, lastKey);
 			}
 		}
-	}, socket, inputHandlerPtr);
+		}, socket, inputHandlerPtr);
 }
 
 void Game::AddToRedraw(Point point, int value)
@@ -68,6 +68,78 @@ void Game::AddToRedraw(Point point, int value)
 	sem.lock();
 	fieldsToRedraw.push(point);
 	sem.unlock();
+}
+
+void Game::WriteStart(int color) {
+	// S
+	graphicsEnginePtr->DrawCell(5, 13, color);
+	graphicsEnginePtr->DrawCell(6, 13, color);
+	graphicsEnginePtr->DrawCell(7, 13, color);
+	graphicsEnginePtr->DrawCell(5, 14, color);
+	graphicsEnginePtr->DrawCell(5, 15, color);
+	graphicsEnginePtr->DrawCell(6, 15, color);
+	graphicsEnginePtr->DrawCell(7, 15, color);
+	graphicsEnginePtr->DrawCell(7, 16, color);
+	graphicsEnginePtr->DrawCell(7, 17, color);
+	graphicsEnginePtr->DrawCell(6, 17, color);
+	graphicsEnginePtr->DrawCell(5, 17, color);
+
+	// T
+	graphicsEnginePtr->DrawCell(9, 13, color);
+	graphicsEnginePtr->DrawCell(10, 13, color);
+	graphicsEnginePtr->DrawCell(11, 13, color);
+	graphicsEnginePtr->DrawCell(10, 14, color);
+	graphicsEnginePtr->DrawCell(10, 15, color);
+	graphicsEnginePtr->DrawCell(10, 16, color);
+	graphicsEnginePtr->DrawCell(10, 17, color);
+
+	// A
+	graphicsEnginePtr->DrawCell(13, 13, color);
+	graphicsEnginePtr->DrawCell(13, 14, color);
+	graphicsEnginePtr->DrawCell(13, 15, color);
+	graphicsEnginePtr->DrawCell(13, 16, color);
+	graphicsEnginePtr->DrawCell(13, 17, color);
+
+	graphicsEnginePtr->DrawCell(14, 13, color);
+	graphicsEnginePtr->DrawCell(14, 15, color);
+
+	graphicsEnginePtr->DrawCell(15, 13, color);
+	graphicsEnginePtr->DrawCell(15, 14, color);
+	graphicsEnginePtr->DrawCell(15, 15, color);
+	graphicsEnginePtr->DrawCell(15, 16, color);
+	graphicsEnginePtr->DrawCell(15, 17, color);
+
+	// R
+	graphicsEnginePtr->DrawCell(17, 13, color);
+	graphicsEnginePtr->DrawCell(17, 14, color);
+	graphicsEnginePtr->DrawCell(17, 15, color);
+	graphicsEnginePtr->DrawCell(17, 16, color);
+	graphicsEnginePtr->DrawCell(17, 17, color);
+
+	graphicsEnginePtr->DrawCell(18, 13, color);
+	graphicsEnginePtr->DrawCell(18, 15, color);
+	graphicsEnginePtr->DrawCell(18, 16, color);
+
+	graphicsEnginePtr->DrawCell(19, 13, color);
+	graphicsEnginePtr->DrawCell(19, 14, color);
+	graphicsEnginePtr->DrawCell(19, 15, color);
+	graphicsEnginePtr->DrawCell(19, 17, color);
+
+	// T
+	graphicsEnginePtr->DrawCell(21, 13, color);
+	graphicsEnginePtr->DrawCell(22, 13, color);
+	graphicsEnginePtr->DrawCell(23, 13, color);
+	graphicsEnginePtr->DrawCell(22, 14, color);
+	graphicsEnginePtr->DrawCell(22, 15, color);
+	graphicsEnginePtr->DrawCell(22, 16, color);
+	graphicsEnginePtr->DrawCell(22, 17, color);
+}
+
+void Game::PrintStartGame()
+{
+	WriteStart(10);	
+	Sleep(100);
+	WriteStart(0);
 }
 
 void Game::DrawMap()
