@@ -13,20 +13,89 @@
 #define KEY_LEFT 0x25
 #define KEY_RIGHT 0x27
 
-//watek sluchajcy musi wiedziec, ktorego gracza dotyczy (index zawart w zmiennej player) //done
-void* startListening(void* arg){
-	
-	//POBIERANIE DANYCH Z ARGUMENTU
-	Player* player = ((Argument*)arg)->player;
-	int listenSocket = ((Argument*)arg)->socketOutput;
-	pthread_mutex_t* sem = ((Argument*)arg)->sem;
-	Board* board = ((Argument*)arg)->board;
-	free((Argument*) arg);
-	
+
+Player* initPlayer(int socketInput, Board* board){
+        Player *player = (Player*)malloc(sizeof(Player));
+        player->index = board->playersNumber;
+        player->socket = socketInput;
+        player->alive = true;
+        player->direction = DOWN;
+        player->lastDirection = NONE_DIRECTION;
+        return player;
+}
+
+bool fullTable(Board* board){
+        bool isFull;
+        pthread_mutex_lock(board->sem); // LOCK
+        if(board->playersNumber == board->maxPlayersNumber){
+                isFull = true;
+        }
+        else{
+                isFull = false;
+        }
+        pthread_mutex_unlock(board->sem); // UNLOCk
+        return isFull;
+}
+
+void waitForFreeTable(Board* board, int socketInput){
+	        //szukanie stolu
+        char buffer[MAX_MESSAGE_SIZE]; //BUFFER NA WIADOMOSCI
+
+        if(board->playersNumber == board->maxPlayersNumber){
+                //send waiting notification
+                memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
+                strcpy(buffer,"WAIT_FOR_FREE_SLOT");
+                send(socketInput,buffer,strlen(buffer),0);
+
+        }
+
+        while(fullTable(board)){
+                //wait simply
+                sleep(1);
+        }
+
+	//WYCZEKANO WOLNE MIEJSCE
+        memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
+        strcpy(buffer,"OK JOIN"); 
+        send(socketInput,buffer,strlen(buffer),0);//WYSYLANIE POTWIERDZENIA
+
+
+}
+
+
+
+//czysci lobby gdy gracz wyszedl, bo znudzil
+//sie czekaniem na innych graczy
+void cleanLobby(Board* board, Player* player, pthread_mutex_t* sem){
+
+	Player* temp;
+	free(player);
+	pthread_mutex_lock(sem);//LOCK SEM
+		//swapujemy od lewej do konca
+		for(int i=player->index; i< board->maxPlayersNumber - 2;  i++){
+			//swap
+			temp = board->players[i];
+			board->players[i] = board->players[i+1];
+			board->players[i+1] = temp;
+		}
+		board->playersNumber--; 
+		if(board->playersNumber < 0){
+			board->playersNumber =0;
+		}
+		printf("cleaned player in lobby\n");
+	pthread_mutex_unlock(sem);//UNLOCK SEM	
+
+
+}
+
+
+
+void waitAndPlay(Board* board, Player* player,pthread_mutex_t* sem, int listenSocket){
 	bool socketConnected = true;
-
-
 	char buffer[MAX_MESSAGE_SIZE];
+
+
+	//Petla do gry 
 	char key;//WCISNIETY KLAWISZ
 	while(socketConnected){ //while socket otwarty
 		memset(buffer,0,MAX_MESSAGE_SIZE);
@@ -71,26 +140,56 @@ void* startListening(void* arg){
 			
 		}				
 	}
-	
-	if(board->runningGame == false){ //czyszczenie gracza w lobby
-		Player* temp;
-		free(player);
-		pthread_mutex_lock(sem);//LOCK SEM
-			//swapujemy od lewej do konca
-			for(int i=player->index; i< board->maxPlayersNumber - 2;  i++){
-				//swap
-				temp = board->players[i];
-				board->players[i] = board->players[i+1];
-				board->players[i+1] = temp;
-			}
-			board->playersNumber--; 
-			if(board->playersNumber < 0){
-				board->playersNumber =0;
-			}
-			printf("cleaned player\n");
-		pthread_mutex_unlock(sem);//UNLOCK SEM	
 
+	if(board->runningGame == false){ //czyszczenie gracza w lobby, bo z niego wyszedl
+		//brak warunku by nie czyscic ponownie po zakonczeniu gry
+		cleanLobby(board,player,sem);
 	}
+
+
+}
+
+//watek sluchajcy musi wiedziec, ktorego gracza dotyczy (index zawart w zmiennej player) //done
+void* startListening(void* arg){
+	
+	//POBIERANIE DANYCH Z ARGUMENTU
+	Player* player = ((Argument*)arg)->player;
+	int listenSocket = ((Argument*)arg)->socketOutput;
+	pthread_mutex_t* sem = ((Argument*)arg)->sem;
+	Board* board = ((Argument*)arg)->board;
+	free((Argument*) arg);
+
+
+	char buffer[MAX_MESSAGE_SIZE];
+
+
+	//czekanie na wolny stol
+	waitForFreeTable(board,listenSocket);
+
+
+	//dodanie gracza do stolu	
+	if(recv(listenSocket, buffer, 80,0) != 0){//jest jeszce polaczenie
+        //klient wyslal sygnal OK JOINING
+		printf("player in lobby\n");
+	        //INICJALIZACJA GRACZA
+        	player =initPlayer(listenSocket,board);
+	
+                //dodanie gracza do stolu
+                pthread_mutex_lock(board->sem);
+
+                board->players[board->playersNumber] = player;
+                player->index = board->playersNumber;
+
+                board->playersNumber++;
+                pthread_mutex_unlock(board->sem);
+
+		waitAndPlay(board,player,sem,listenSocket);
+        }
+        else{//polaczenie zerwane
+                free(player);
+		printf("player wasn't patient enough\n");
+        }
+	
 
 	printf("server listening socket close\n");
 	close(listenSocket);

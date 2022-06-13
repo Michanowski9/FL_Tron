@@ -48,83 +48,20 @@ Board* CreateBoard(int maxPlayers){
 }
 
 
-Player* initPlayer(int socketInput, Board* board){
-	Player *player = (Player*)malloc(sizeof(Player));
-	player->index = board->playersNumber;
-	player->socket = socketInput;
-	player->alive = true;
-	player->direction = DOWN;
-	player->lastDirection = NONE_DIRECTION;
-	return player;
-}
 
-
-
-bool fullTable(Board* board){
-	bool isFull;
-	pthread_mutex_lock(board->sem); // LOCK
-	if(board->playersNumber == board->maxPlayersNumber){
-		isFull = true;
-	}
-	else{
-		isFull = false;
-	}
-	pthread_mutex_unlock(board->sem); // UNLOCk
-	return isFull;
-}
 
 void Join(int socketInput,Board* board){
-	//szukanie stolu
-	char buffer[MAX_MESSAGE_SIZE]; //BUFFER NA WIADOMOSCI
 
-	if(board->playersNumber == board->maxPlayersNumber){	
-		//send waiting notification
-		memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
-		strcpy(buffer,"WAIT_FOR_FREE_SLOT");
-		send(socketInput,buffer,strlen(buffer),0);
-
-	}
-	
-	while(fullTable(board)){
-		//wait simply
-		sleep(1);		
-	}
-
-	//WYCZEKANO WOLNE MIEJSCE
-	memset(buffer,0,MAX_MESSAGE_SIZE);//czyszczenie bufora
-	strcpy(buffer,"OK JOIN"); 
-	send(socketInput,buffer,strlen(buffer),0);//WYSYLANIE POTWIERDZENIA
-	
-	//INICJALIZACJA GRACZA
-	Player *player =initPlayer(socketInput,board);
 
 	Argument *arg = (Argument*)malloc(sizeof(Argument));
 	arg->socketOutput=socketInput;
-	arg->player = player;
 	arg->sem=board->sem; //ten sam semafor co stol
 	arg->board = board;
-	
-	if(recv(socketInput, buffer, 80,0) != 0){//jest jeszce polaczenie
-	//klient wyslal sygnal OK JOINING
-		//dodanie gracza do stolu
-		pthread_mutex_lock(board->sem);
 
-		board->players[board->playersNumber] = player;
-		player->index = board->playersNumber;
+	//utworzenie watku sluchajacego.
+	pthread_t thread_id;
+	pthread_create(&thread_id,NULL,&startListening,(void*)arg);
 
-		board->playersNumber++;
-		pthread_mutex_unlock(board->sem);
-
-
-		//utworzenie watku sluchajacego.
-		pthread_t thread_id;
-		pthread_create(&thread_id,NULL,&startListening,(void*)arg);
-	}
-	else{//polaczenie zerwane
-		free(player);
-		free(arg);
-	}
-		
 }
 
 

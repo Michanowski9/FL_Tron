@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "../structs.h"
 #include "serverReceive.h"
@@ -182,14 +183,15 @@ void* TurnBoardOn(void*arg){
 
 		}
 
+		board->runningGame = true;
+
 		//przygotowanie init pozycji
 		Position* initPositions  = createInitPositions(board);
 
 		//WYSYLAMY INFO O STOLE (POZYCJE) do kazdego gracza
 		SendInitPositions(board,initPositions);
-		sleep(2);
+		sleep(4);
 
-		board->runningGame = true;
 		//WYSYLAMY SYGNAL STARTU GRY
 		for(int i=0;i<board->maxPlayersNumber;i++){
 			startGame(board->players[i]->socket);
@@ -214,13 +216,16 @@ void* TurnBoardOn(void*arg){
 			}
 			
 			pthread_mutex_unlock(board->sem); //UNLOCK SEM		
-			usleep(100000);
+			//usleep(100000); //calkiem dobre
+			usleep(1000000);
 		
 		}
 		//informujemy o zakonczeniu gry
 		SendEndGameSignal(board);
 		//czyszczenie stolu, gdy gra sie zakonczyla
 		CleanTable(board);
+		printf("table cleaned\n");
+		sleep(2);
 		board->runningGame = false;
 	}
 
