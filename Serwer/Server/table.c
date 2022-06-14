@@ -147,7 +147,7 @@ bool gameRunning(Board* board){
 		}
 	}
 
-	if(alivePlayers > 0){
+	if(alivePlayers > 1){
 		return true;
 	}
 	else{
@@ -216,8 +216,7 @@ void* TurnBoardOn(void*arg){
 			}
 			
 			pthread_mutex_unlock(board->sem); //UNLOCK SEM		
-			//usleep(100000); //calkiem dobre
-			usleep(1000000);
+			usleep(150000); //calkiem dobre			
 		
 		}
 		//informujemy o zakonczeniu gry

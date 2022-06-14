@@ -12,7 +12,7 @@
 
 #define HTONS 3001
 
-#define MAX_PLAYERS 1
+#define MAX_PLAYERS 2
 #define MAX_MESSAGE_SIZE 80
 #define TABLE_SIZE 32
 

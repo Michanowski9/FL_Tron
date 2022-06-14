@@ -63,9 +63,9 @@ void Game::StartInputHandling(SOCKET socket)
 
 void Game::AddToRedraw(Point point, int value)
 {
-	map[point.x][point.y] = value;
-
 	sem.lock();
+	map[point.x][point.y] = value;
+	
 	fieldsToRedraw.push(point);
 	sem.unlock();
 }
@@ -137,19 +137,29 @@ void Game::WriteStart(int color) {
 
 void Game::PrintStartGame()
 {
-	WriteStart(10);	
-	Sleep(100);
-	WriteStart(0);
+	WriteStart(10);
+	timer = std::chrono::high_resolution_clock::now();
+}
+
+void Game::PrintPlayer(int color)
+{
+	graphicsEnginePtr->DrawCell(75, 4, color);
+	graphicsEnginePtr->DrawCell(76, 4, color);
+	graphicsEnginePtr->DrawCell(77, 4, color);
 }
 
 void Game::DrawMap()
 {
 	system("cls");
+	
 	for (int row = 0; row < mapSize.x; row++) {
 		for (int col = 0; col < mapSize.y; col++) {
+			sem.lock();
 			graphicsEnginePtr->DrawCell(row, col, map[row][col]);
+			sem.unlock();
 		}
 	}
+	
 }
 
 void Game::MainLoop()
@@ -162,7 +172,16 @@ void Game::MainLoop()
 
 void Game::Update()
 {
+	if (text_cleared == false)
+	{
+		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
+		long long res = (end - timer).count();
+		if (res * pow(10, -9) >= 1) {
+			WriteStart(0);
+			text_cleared = true;
+		}
 
+	}
 }
 
 void Game::RedrawPartOfMap()

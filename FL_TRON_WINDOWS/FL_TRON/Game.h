@@ -9,6 +9,7 @@
 #include <thread>
 #include "Point.h"
 #include <mutex>
+#include <chrono>
 
 #include "connect.h"
 
@@ -36,6 +37,8 @@ public:
 
 	void PrintStartGame();
 
+	void PrintPlayer(int color);
+
 	void DrawMap();
 	void MainLoop();
 private:
@@ -54,6 +57,8 @@ private:
 
 	int** map;
 	Point mapSize;
+	std::chrono::steady_clock::time_point timer;
+	bool text_cleared = false;
 };
 
 #endif // !_GAME_H_

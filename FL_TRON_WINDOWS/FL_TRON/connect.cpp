@@ -16,7 +16,7 @@
 
 /// Server IPv4 address, you can find it in your operating system on computer which is running server instance
 /// Settings -> Network -> (Settings Icon) -> IPv4 Address
-#define INET_ADDR "192.168.0.88"
+#define INET_ADDR "192.168.214.36"
 
 #define TABLE_SIZE 8
 #define MAX_NICK_LENGTH 10
@@ -151,10 +151,11 @@ void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
 	int playerColor;
 	playerColor = atoi(&buffer[bufIndex]);				//pobranie playerIndex
 	playerColor++;
+	
 
 	//TODO 
 	//WYRYSOWANIE KOLORU GDZIEŒ NA EKRANIE
-	printf("kolor = %d", playerColor);
+	//printf("kolor = %d", playerColor);
 	//
 
 	bufIndex = getNextSpaceBar(buffer, bufIndex);
@@ -167,6 +168,9 @@ void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
 		bufIndex = getNextSpaceBar(buffer, bufIndex);		
 		gamePtr->AddToRedraw(Point(pos.x, pos.y), i + 1);
 	}
+
+	gamePtr->DrawMap();
+	gamePtr->PrintPlayer(playerColor);
 }
 
 
