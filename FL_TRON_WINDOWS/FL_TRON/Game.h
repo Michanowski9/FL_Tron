@@ -36,6 +36,8 @@ public:
 
 	void PrintStartGame();
 
+	void PrintPlayer(int color);
+
 	void DrawMap();
 	void MainLoop();
 private:
@@ -54,6 +56,7 @@ private:
 
 	int** map;
 	Point mapSize;
+	int timer = 0;
 };
 
 #endif // !_GAME_H_

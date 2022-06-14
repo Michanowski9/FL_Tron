@@ -138,8 +138,13 @@ void Game::WriteStart(int color) {
 void Game::PrintStartGame()
 {
 	WriteStart(10);	
-	Sleep(100);
-	WriteStart(0);
+}
+
+void Game::PrintPlayer(int color)
+{
+	graphicsEnginePtr->DrawCell(75, 0, color);
+	graphicsEnginePtr->DrawCell(76, 0, color);
+	graphicsEnginePtr->DrawCell(77, 0, color);
 }
 
 void Game::DrawMap()
@@ -162,7 +167,10 @@ void Game::MainLoop()
 
 void Game::Update()
 {
-
+	timer++;
+	if (timer == 1000) {
+		WriteStart(0);
+	}
 }
 
 void Game::RedrawPartOfMap()

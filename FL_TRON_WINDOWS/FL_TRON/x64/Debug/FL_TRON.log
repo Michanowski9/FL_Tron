@@ -1,2 +1,5 @@
-﻿  client.cpp
-  FL_TRON.vcxproj -> D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_Tron-main\FL_TRON_WINDOWS\x64\Debug\client.exe
+﻿  Game.cpp
+  client.cpp
+  connect.cpp
+  Generating Code...
+  FL_TRON.vcxproj -> C:\Users\Michal\Desktop\FL_Tron\FL_TRON_WINDOWS\x64\Debug\client.exe

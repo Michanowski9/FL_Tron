@@ -152,6 +152,8 @@ void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
 	playerColor = atoi(&buffer[bufIndex]);				//pobranie playerIndex
 	playerColor++;
 
+	gamePtr->PrintPlayer(playerColor);
+
 	//TODO 
 	//WYRYSOWANIE KOLORU GDZIEŒ NA EKRANIE
 	printf("kolor = %d", playerColor);
