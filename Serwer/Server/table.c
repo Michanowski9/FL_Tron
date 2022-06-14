@@ -216,8 +216,7 @@ void* TurnBoardOn(void*arg){
 			}
 			
 			pthread_mutex_unlock(board->sem); //UNLOCK SEM		
-			//usleep(100000); //calkiem dobre
-			usleep(1000000);
+			usleep(100000); //calkiem dobre			
 		
 		}
 		//informujemy o zakonczeniu gry
