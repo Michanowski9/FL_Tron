@@ -1,9 +1,2 @@
-<<<<<<< Updated upstream
-﻿  FL_TRON.vcxproj -> D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_Tron\FL_TRON_WINDOWS\x64\Debug\client.exe
-=======
-﻿  ConsoleOutput.cpp
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\ConsoleOutput.cpp(15,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\ConsoleOutput.cpp(23,16): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\FL_TRON\ConsoleOutput.cpp(23,19): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-  FL_TRON.vcxproj -> C:\Users\wdmk4\OneDrive\Desktop\FL_Tron\FL_TRON_WINDOWS\x64\Debug\client.exe
->>>>>>> Stashed changes
+﻿  client.cpp
+  FL_TRON.vcxproj -> D:\pliki\programy\STUDIA\Przetwarzanie Rozproszone\FL_Tron-main\FL_TRON_WINDOWS\x64\Debug\client.exe

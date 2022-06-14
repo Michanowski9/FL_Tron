@@ -51,7 +51,7 @@ int main (int argc, char *argv[]){
 			//tworzenie wątku nasłuchującego
 			CreateReceiveSocket(socketInput, &gameStarted, &sem, &(*gamePtr));
 
-			gamePtr->DrawMap();
+			//gamePtr->DrawMap();
 			//waiting to start
 			while(!GameStarted(&sem,&gameStarted)) {
 				Sleep(1);

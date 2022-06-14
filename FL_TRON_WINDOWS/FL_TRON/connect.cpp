@@ -221,6 +221,7 @@ DWORD WINAPI turnOnReceiveSocket(void* arg) {
 		//INIT BOARD
 		else if (strncmp(buffer, "BOARD", 5) == 0) {
 			initBoard(buffer, gamePtr);
+			gamePtr->DrawMap();
 		}
 		else if (strncmp(buffer, "START_GAME", 10) == 0) {
 			startGame(gameStarted);			
