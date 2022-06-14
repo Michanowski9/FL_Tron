@@ -147,7 +147,7 @@ bool gameRunning(Board* board){
 		}
 	}
 
-	if(alivePlayers > 0){
+	if(alivePlayers > 1){
 		return true;
 	}
 	else{
