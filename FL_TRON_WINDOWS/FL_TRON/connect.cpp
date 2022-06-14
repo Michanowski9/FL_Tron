@@ -156,7 +156,7 @@ void initBoard(char buffer[MAX_MESSAGE_SIZE], Game* gamePtr) {
 
 	//TODO 
 	//WYRYSOWANIE KOLORU GDZIEŒ NA EKRANIE
-	printf("kolor = %d", playerColor);
+	//printf("kolor = %d", playerColor);
 	//
 
 	bufIndex = getNextSpaceBar(buffer, bufIndex);
